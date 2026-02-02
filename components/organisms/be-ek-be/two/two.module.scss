@@ -1,0 +1,42 @@
+.outer-wrapper {
+  width: 100%;
+  background-image: url('/bg.png');
+  background-repeat: repeat;
+  background-color: #fff;
+
+  padding-bottom: 100px;
+  h2,
+  p {
+    margin: 0;
+  }
+  .inner-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+    align-items: center;
+    h2 {
+      font-family: Axiforma Black;
+      font-size: 49px;
+      line-height: 54px;
+      color: #383336;
+    }
+    p {
+      font-family: Axiforma Regular;
+      font-size: 21px;
+      line-height: 29px;
+      color: #383336;
+
+      max-width: 945px;
+      text-align: center;
+    }
+
+    @media(max-width: 768px) {
+      img {
+        display: none;
+      }
+    }
+  }
+}

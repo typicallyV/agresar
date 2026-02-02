@@ -1,0 +1,104 @@
+.outer-wrapper {
+  width: 100%;
+  //   height: 708px;
+  border-radius: 12px;
+  margin: 80px 0;
+  padding: 78px 0 83px;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .inner-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    h2 {
+      font-family: Axiforma Black;
+      font-size: 49px;
+      text-align: center;
+      color: #383336;
+      margin-bottom: 100px;
+
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -45px;
+        left: 38%;
+        width: 20%; /* Adjust the width of the line */
+        height: 100px;
+        background-image: url('/h2Underline.svg'); /* Replace with your image path */
+        background-repeat: no-repeat;
+        background-size: contain; /* Adjust as needed */
+        background-position: center; /* Adjust as needed */
+      }
+    }
+
+    div {
+      @media only screen and (max-width: 768px) {
+   
+        flex-direction: column;
+        align-items: center;
+      }
+
+      display: flex;
+      justify-content: space-between;
+      gap: 70px;
+      //   align-items: center;
+
+      .right {
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+        justify-content: center;
+        h3 {
+          font-family: Axiforma Bold;
+          font-size: 26px;
+          line-height: 36px;
+        }
+
+        p {
+          font-size: 18px;
+          line-height: 35px;
+          color: #383336;
+          font-family: Axiforma Regular;
+        }
+        .donation {
+          display: flex;
+          justify-content: flex-start;
+          gap: 0;
+          border: 1px solid #f7902e;
+          width: fit-content;
+          border-radius: 8px;
+
+          .donation-left {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 10px;
+
+            .text {
+              font-family: Axiforma Regular;
+              font-size: 22px;
+              line-height: 35px;
+              color: #383336;
+            }
+            .amount {
+              font-family: Axiforma Bold;
+              font-size: 30px;
+              line-height: 35px;
+              color: #000000;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+.outer-wrapper {
+  width: 100%;
+  background: #fff;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .inner-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media only screen and (max-width: 768px) {
+   
+      flex-direction: column-reverse;
+
+      .left {
+        max-height: 350px;
+        justify-content: start;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+    }
+
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+      height: 700px;
+
+      h2 {
+        font-family: Axiforma Black;
+        font-size: 49px;
+        line-height: 54px;
+        color: #383336;
+        position: relative;
+
+        span {
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -55px;
+            left: 25%;
+            width: 200px; /* Adjust the width of the line */
+            height: 100px;
+            background-image: url('/h2Underline.svg'); /* Replace with your image path */
+            background-repeat: no-repeat;
+            background-size: contain; /* Adjust as needed */
+            background-position: center; /* Adjust as needed */
+          }
+        }
+      }
+
+      p {
+        font-family: Axiforma Medium;
+        font-size: 21px;
+        line-height: 35px;
+        color: #383336;
+      }
+    }
+
+    .right {
+      width: 100%;
+    }
+  }
+}

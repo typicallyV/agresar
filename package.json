@@ -1,0 +1,50 @@
+{
+  "name": "anant",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "next export"
+  },
+  "dependencies": {
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.9",
+    "axios": "^1.7.9",
+    "body-parser": "^1.20.3",
+    "bootstrap": "^5.3.3",
+    "browserfs": "^1.4.3",
+    "cors": "^2.8.5",
+    "eslint": "8.28.0",
+    "eslint-config-next": "13.0.5",
+    "express": "^4.21.2",
+    "fs": "^0.0.1-security",
+    "jsonfile": "^6.1.0",
+    "lottie-react": "^2.4.1",
+    "lowdb": "^7.0.1",
+    "next": "13.0.5",
+    "react": "18.2.0",
+    "react-bootstrap": "^2.10.9",
+    "react-dom": "18.2.0",
+    "react-responsive-carousel": "^3.2.23",
+    "saas": "^1.0.0",
+    "sass": "^1.57.1",
+    "sharp": "^0.32.1",
+    "sweetalert2": "^11.15.10",
+    "typescript": "4.9.3"
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "next.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.0",
+    "@types/bootstrap": "^5.2.10",
+    "babel-loader": "^10.0.0"
+  }
+}

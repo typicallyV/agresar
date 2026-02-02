@@ -1,0 +1,128 @@
+.outer-wrapper {
+  width: 1085px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 3px 15px #0000001c;
+  border-radius: 22px;
+  overflow-y: scroll;
+
+  h3,
+  p,
+  h2 {
+    margin: 0;
+  }
+
+  .header {
+    padding: 20px 100px;
+    height: 130px;
+    background: #fffcf3;
+    box-shadow: 0px 3px 15px #0000001c;
+    border-radius: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+      font-family: Axiforma Regular;
+      font-size: 33px;
+      line-height: 36px;
+      color: #383336;
+    }
+  }
+  
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    gap: 40px;
+    width: 100%;
+    padding-bottom: 50px;
+
+    .form-container {
+      display: flex;
+      align-items: center;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+
+      .form-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 600px;
+        margin: 20px;
+
+        label {
+          font-family: Axiforma Regular;
+          font-size: 18px;
+          line-height: 20px;
+          color: #383336;
+        }
+
+        input {
+          height: 40px;
+          border: none;
+          padding: 0 10px;
+          font-family: Axiforma Regular;
+          font-size: 18px;
+          line-height: 20px;
+          color: #383336;
+          background: #f1f2f3;
+
+          &:focus {
+            outline: orange auto 1px;
+          }
+        }
+
+        textarea {
+          height: 100px;
+          border: none;
+          background: #f1f2f3;
+          padding: 10px;
+          font-family: Axiforma Regular;
+          font-size: 18px;
+          line-height: 20px;
+          color: #383336;
+
+          &:focus {
+            outline: orange auto 1px;
+          }
+        }
+
+        .interests {
+          div {
+            display: flex;
+            align-items: center;
+
+            input[type='checkbox'] {
+              width: 20px;
+              height: 20px;
+              margin-right: 10px;
+            }
+          }
+        }
+
+        .genders {
+          display: flex;
+          gap: 20px;
+          justify-content: flex-start;
+
+          div {
+            height: 100px;
+            width: 116px;
+            background: #f1f2f3;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+
+        .radioBtn {
+          display: flex;
+        }
+      }
+    }
+  }
+}

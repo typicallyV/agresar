@@ -1,0 +1,95 @@
+.outer-wrapper {
+  width: 100%;
+  height: 708px;
+  background: #fffcf3;
+  border-radius: 12px;
+  margin: 147px 0;
+  padding: 78px 0 83px;
+
+  
+  @media only screen and (max-width: 768px) {
+   
+    height: auto;
+  }
+
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .inner-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    h2 {
+      font-family: Axiforma Black;
+      font-size: 49px;
+      text-align: center;
+      color: #383336;
+
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -45px;
+        right: 35%;
+        width: 200px; /* Adjust the width of the line */
+        height: 100px;
+        background-image: url('/h2Underline.svg'); /* Replace with your image path */
+        background-repeat: no-repeat;
+        background-size: contain; /* Adjust as needed */
+        background-position: center; /* Adjust as needed */
+      }
+    }
+    .cards {
+      display: flex;
+      justify-content: space-between;
+      gap: 43px;
+      margin-top: 131px;
+      
+    @media only screen and (max-width: 768px) {
+   
+      flex-direction: column;
+      align-items: center;
+    }
+
+
+      .card {
+        height: 303px;
+        width: 317px;
+        box-shadow: 0px 3px 15px #0000001c;
+        text-align: center;
+        background: #fff;
+        border-radius: 22px;
+        position: relative;
+        padding-top: 70px;
+
+        .icon {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: -58px;
+        }
+
+        h1 {
+          font-family: Axiforma Black;
+          font-size: 92px;
+          line-height: 123px;
+          color: #383336;
+        }
+        p {
+          font-family: Axiforma Bold;
+          font-size: 33px;
+          line-height: 36px;
+          color: #000000;
+        }
+      }
+    }
+  }
+}
