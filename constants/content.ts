@@ -7,8 +7,7 @@ import style from "styled-jsx/style"
 // import foodKit from '../assets/images/foodKit.svg'
 export const navItems = [
   { text: 'Home', href: '/' },
-  { text: 'About Us', href: '/about' },
-  { text: 'Work', href: '/work' },
+  { text: 'About Us', href: '/about' }, 
   { text: 'Events', href: '/events' },
   { text: 'Contact Us', href: '/contact' },
    
@@ -36,19 +35,18 @@ export const content = {
         img: {
           src: '/assets/home/one/right.png',
           alt: 'homeright',
-          height: 600,
-          width: 700,
+           width: 2500, 
+         height: 2580,
         },
       },
     },
     two: {
-      left: {
-        img: {
-          src: '/assets/home/five/item-2.png',
-          alt: 'homeTwoLeft...',
-          height: 487,
-          width: 720,
-        },
+      left: { img: { 
+        src: '/assets/home/five/kids.png',
+         alt: 'homeTwoLeft...', 
+         width: 1800, 
+         height: 1280, 
+        }, 
       },
       right: {
         h2: 'About Us',
@@ -59,8 +57,11 @@ export const content = {
         morally balanced youth who wish to give their bit and more to the
         society.`,
       },
-      hyperlink: {
-        text: 'Read More',
+       
+     hyperlink: {
+       
+          text: 'Know More',
+         
         href: '/about',
         img: {
           src: '/assets/home/eight/leftArrow.svg',
@@ -69,6 +70,8 @@ export const content = {
           width: 16,
         },
       },
+
+
     },
     three: {
       h2: 'Our Numbers',
@@ -280,7 +283,7 @@ export const content = {
         },
         p: {
           dangerouslySetInnerHTML:
-            'Agresar is an attempt to bring structure to random act of kindness ',
+            'Agresar Foundation brings to the fore, pertinent issues that plague the society and collaborates with enablers to bring about a change. The foundation is run by self-driven, socially accountable and morally balanced youth who wish to give their bit and more to the society.',
         },
       },
       right: {
@@ -288,7 +291,7 @@ export const content = {
           src: '/assets/about/one/right.png',
           alt: 'aboutright',
           height: 576,
-          width: 716,
+          width: 916,
         },
       },
     },
@@ -362,7 +365,7 @@ export const content = {
         {
           year: '2019',
           content:
-            'Agresar intensified its women’s empowerment initiatives in 2019 by expanding the “Be Eke Be” program, which had begun demonstrating tangible impact. Women participants started their own small businesses, including poultry farming, tailoring, and local handicraft production, backed by Agresar’s mentorship and financial support. The foundation also launched a farmer-led initiative to promote organic farming techniques and water conservation methods, improving agricultural resilience. Moreover, skill development programs were extended to rural youth, equipping them with vocational skills that increased employability. Agresar’s holistic approach strengthened community structures, allowing rural individuals to achieve economic independence.',
+            'Agresar intensified its women’s empowerment initiatives in 2019 by expanding the “Be Eke Be” program, which had begun demonstrating tangible impact. Women participants url their own small businesses, including poultry farming, tailoring, and local handicraft production, backed by Agresar’s mentorship and financial support. The foundation also launched a farmer-led initiative to promote organic farming techniques and water conservation methods, improving agricultural resilience. Moreover, skill development programs were extended to rural youth, equipping them with vocational skills that increased employability. Agresar’s holistic approach strengthened community structures, allowing rural individuals to achieve economic independence.',
         },
         {
           year: '2020',
@@ -437,76 +440,28 @@ export const content = {
         },
       },
     },
-    two: {
-      left: {
-        h3: 'Education & Scholarship',
-        p: 'Agresar Foundation brings to the fore, pertinent issues that plague the society and collaborates with enablers to bring about a change. The foundation is run by self-driven, socially accountable and morally balanced youth who wish to give their bit and more to the society.',
-      },
-      right: {
-        img: {
-          src: '/assets/events/two/right.png',
-          alt: 'eventsTwoRight',
-          height: 520,
-          width: 450,
-        },
-      },
+     three: { left: { h3: 'Education & Scholarship', p: 'Agresar Foundation brings to the fore, pertinent issues that plague the society and collaborates with enablers to bring about a change. The foundation is run by self-driven, socially accountable and morally balanced youth who wish to give their bit and more to the society.', }, 
+     right: { 
+      img: { src: '/assets/events/six/item-5.jpg',
+         alt: 'eventsTwoRight', 
+       height: 450,
+width: 450,
+
+     }, 
     },
-    three: {
-      left: {
-        h3: 'Education & Scholarship',
-        p: 'Agresar Foundation brings to the fore, pertinent issues that plague the society and collaborates with enablers to bring about a change. The foundation is run by self-driven, socially accountable and morally balanced youth who wish to give their bit and more to the society.',
-      },
-      right: {
-        img: {
-          src: '/assets/events/two/right.png',
-          alt: 'eventsTwoRight',
-          height: 520,
-          width: 450,
-        },
-      },
+  },
+  six: { left: { h3: 'WHAT IS बे एके बे ?', p: ' t Agresar Foundation, we celebrate the National Mathematics day on a Birth Anniversary of the great Indian mathematician Dr. Srinivasa Ramanujan. He was elected as a fellow at Trinity College, Cambridge and made a great contribution in the field of mathematics. Some of his well known contributions are Complex Analysis, Number Theory, Infinite Series Continued Fraction, etc.Agresar Foundation organizes an event named बे एके बे every year. Under an umbrella of the बे एके बे event we carry out various competitions, expert guest guidance lectures, etc. to increase the curiosity of students as well as spread mathematical awareness among the general public', }
+  , right: { img: { src: '/assets/events/four/beekbe.png', alt: 'eventsTwoRight',  
+   height: 450,
+width: 450,
+
+     }, 
     },
-    four: {
-      left: {
-        h3: 'Education & Scholarship',
-        p: 'Agresar Foundation brings to the fore, pertinent issues that plague the society and collaborates with enablers to bring about a change. The foundation is run by self-driven, socially accountable and morally balanced youth who wish to give their bit and more to the society.',
-      },
-      right: {
-        img: {
-          src: '/assets/events/two/right.png',
-          alt: 'eventsTwoRight',
-          height: 520,
-          width: 450,
-        },
-      },
-    },
-    five: {
-      left: {
-        h3: 'Education & Scholarship',
-        p: 'Agresar Foundation brings to the fore, pertinent issues that plague the society and collaborates with enablers to bring about a change. The foundation is run by self-driven, socially accountable and morally balanced youth who wish to give their bit and more to the society.',
-      },
-      right: {
-        img: {
-          src: '/assets/events/two/right.png',
-          alt: 'eventsTwoRight',
-          height: 520,
-          width: 450,
-        },
-      },
-    },
-    six: {
-      left: {
-        h3: 'Education & Scholarship',
-        p: 'Agresar Foundation brings to the fore, pertinent issues that plague the society and collaborates with enablers to bring about a change. The foundation is run by self-driven, socially accountable and morally balanced youth who wish to give their bit and more to the society.',
-      },
-      right: {
-        img: {
-          src: '/assets/events/two/right.png',
-          alt: 'eventsTwoRight',
-          height: 520,
-          width: 450,
-        },
-      },
-    },
+  },
+     
+    
+     
+    
     seven: {
       h3: 'Come Join our Volunteer',
       p: `We're always looking for great Volunteers`,

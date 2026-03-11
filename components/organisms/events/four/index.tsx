@@ -19,8 +19,8 @@ const Index = () => {
         {/* BIG LEFT IMAGE (Desktop Only) */}
         <div className={styles.bigLogo}>
           <Image
-            src={content?.home?.four?.logo?.src}
-            alt={content?.home?.four?.logo?.alt}
+            src={content?.events?.four?.logo?.src}
+            alt={content?.events?.four?.logo?.alt}
             width={304}
             height={500}
           />
@@ -32,19 +32,19 @@ const Index = () => {
           <div className={styles.headingRow}>
             {/* SMALL PNG (Mobile Only) */}
             <Image
-              src={content?.home?.four?.logo?.src}
+              src={content?.events?.four?.logo?.src}
               alt="small-beekbe"
               width={50}
               height={80}
               className={styles.smallLogo}
             />
-            <h2>{content?.home?.four?.h2}</h2>
+            <h2>{content?.events?.four?.h2}</h2>
           </div>
 
-          <p>{content?.home?.four?.p}</p>
+          <p>{content?.events?.four?.p}</p>
 
           <Button
-            text={content?.home?.four?.button?.text}
+            text={content?.events?.four?.button?.text}
             type="secondary"
             onClick={handleClick}
           />

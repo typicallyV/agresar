@@ -11,41 +11,50 @@ import Ten from '../components/organisms/home/ten'
 import Layout from '../components/layout'
 import OurNumbers from '../components/home/OurNumbers'
 import { content } from '../constants/content'
-import axios from 'axios'
 
-interface IndexProps {
-  pageConfig?: any
-}
-
-const Index = ({ pageConfig }: IndexProps) => {
+const Index = () => {
   return (
     <Layout>
       <One />
-      <Two />
-      {/* Replace Three with the animated OurNumbers component */}
-      <OurNumbers content={content.home} />
-      <Six />
-      <Five />
-      <Four />
-      <Seven />
-      <Ten />
-      <Eight />
-      <Nine />
+      
+      {/* Add spacing between sections */}
+      <div className="my-24">
+        <Two />
+      </div>
+      
+      <div className="my-24">
+        <OurNumbers content={content.home} />
+      </div>
+      
+      <div className="my-32">
+        <Six />
+      </div>
+      
+      <div className="my-24">
+        <Five />
+      </div>
+      
+      <div className="my-24">
+        <Four />
+      </div>
+      
+      <div className="my-24">
+        <Seven />
+      </div>
+      
+      <div className="my-24">
+        <Ten />
+      </div>
+      
+      <div className="my-24">
+        <Eight />
+      </div>
+      
+      <div className="my-24">
+        <Nine />
+      </div>
     </Layout>
   )
-}
-
-export const getServerSideProps = async (ctx: any) => {
-  const config = {
-    method: 'GET',
-    url: 'http://localhost:3000/api/hello',
-  }
-  const response = await axios(config)
-  return {
-    props: {
-      pageConfig: response.data,
-    },
-  }
 }
 
 export default Index

@@ -1,6 +1,5 @@
 .outer-wrapper {
   width: 100%;
-  //   height: 708px;
   border-radius: 12px;
   margin: 80px 0;
   padding: 78px 0 83px;
@@ -18,86 +17,189 @@
   .inner-wrapper {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
+
     h2 {
       font-family: Axiforma Black;
       font-size: 49px;
       text-align: center;
       color: #383336;
       margin-bottom: 100px;
-
       position: relative;
 
       &::after {
         content: '';
         position: absolute;
-        bottom: -45px;
-        left: 38%;
-        width: 20%; /* Adjust the width of the line */
-        height: 100px;
-        background-image: url('/h2Underline.svg'); /* Replace with your image path */
+        bottom: -85px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 75%;
+        height: 120px;
+        background-image: url('/h2Underline.svg');
         background-repeat: no-repeat;
-        background-size: contain; /* Adjust as needed */
-        background-position: center; /* Adjust as needed */
+        background-size: contain;
+        background-position: center;
       }
     }
 
-    div {
-      @media only screen and (max-width: 768px) {
-   
-        flex-direction: column;
-        align-items: center;
-      }
-
+    > div {
       display: flex;
       justify-content: space-between;
       gap: 70px;
-      //   align-items: center;
+    }
+
+    .right {
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+      justify-content: center;
+
+      h3 {
+        font-family: Axiforma Bold;
+        font-size: 26px;
+        line-height: 36px;
+      }
+
+      p {
+        font-size: 18px;
+        line-height: 35px;
+        color: #383336;
+        font-family: Axiforma Regular;
+      }
+
+      .donation {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 320px;
+  border: 1px solid #f7902e;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+margin: 30px auto 0;  // THIS centers it
+  .donation-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 20px;
+    background: #ffffff;
+
+    .text {
+      font-family: Axiforma Regular;
+      font-size: 20px;
+      color: #383336;
+    }
+
+    .amount {
+      font-family: Axiforma Bold;
+      font-size: 26px;
+      color: #000000;
+    }
+  }
+
+  /* FORCE BUTTON TO FIT CARD */
+  :global(button),
+  :global(.button),
+  > *:last-child {
+    width: 100% !important;
+    border-radius: 0 !important;
+  }
+}
+    }
+  }
+
+  /* ===================== MOBILE FIX ===================== */
+
+  @media (max-width: 768px) {
+    margin: 50px 0;
+    padding: 40px 0;
+
+    .inner-wrapper {
+      h2 {
+        font-size: 28px;
+        margin-bottom: 60px;
+
+        &::after {
+          bottom: -45px;
+          width: 80%;
+          height: 60px;
+        }
+      }
+
+      > div {
+        flex-direction: column;
+        gap: 40px;
+        align-items: center;
+      }
 
       .right {
-        display: flex;
-        flex-direction: column;
-        gap: 35px;
-        justify-content: center;
+        gap: 20px;
+        text-align: left;
+        width: 100%;
+
         h3 {
-          font-family: Axiforma Bold;
-          font-size: 26px;
-          line-height: 36px;
+          font-size: 20px;
+          line-height: 28px;
         }
 
         p {
-          font-size: 18px;
-          line-height: 35px;
-          color: #383336;
-          font-family: Axiforma Regular;
+          font-size: 15px;
+          line-height: 26px;
         }
+
         .donation {
-          display: flex;
-          justify-content: flex-start;
-          gap: 0;
-          border: 1px solid #f7902e;
-          width: fit-content;
-          border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 320px;
+  border: 1px solid #f7902e;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
 
-          .donation-left {
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            gap: 10px;
+  .donation-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 20px;
+    gap: 10px;
+    background: #fff;
 
-            .text {
-              font-family: Axiforma Regular;
-              font-size: 22px;
-              line-height: 35px;
-              color: #383336;
-            }
-            .amount {
-              font-family: Axiforma Bold;
-              font-size: 30px;
-              line-height: 35px;
-              color: #000000;
-            }
-          }
-        }
+    .text {
+      font-family: Axiforma Regular;
+      font-size: 20px;
+      color: #383336;
+    }
+
+    .amount {
+      font-family: Axiforma Bold;
+      font-size: 26px;
+      color: #000000;
+    }
+  }
+
+  .donate-btn {
+    background: linear-gradient(270deg, #f58733, #feab20);
+    border: none;
+    padding: 16px;
+    font-family: Axiforma Bold;
+    font-size: 18px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .donate-btn:hover {
+    opacity: 0.9;
+  }
+}
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
       }
     }
   }

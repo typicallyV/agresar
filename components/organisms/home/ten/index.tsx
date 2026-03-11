@@ -40,13 +40,13 @@ const Index = () => {
                   </div>
                 </div>
                 <Button
-                  width={content?.home?.ten?.right?.button?.width}
+                   
                   text={content?.home?.ten?.right?.button?.text}
                   type={content?.home?.ten?.right?.button?.type}
                   onClick={() => {
                     setIsOpen(true)
                   }}
-                  height={content?.home?.ten?.right?.button?.height}
+                   
                 />
               </div>
             </div>

@@ -31,20 +31,21 @@
       font-size: 49px;
       text-align: center;
       color: #383336;
-
+      margin-bottom: 100px;
       position: relative;
 
       &::after {
         content: '';
         position: absolute;
-        bottom: -45px;
-        right: 35%;
-        width: 200px; /* Adjust the width of the line */
-        height: 100px;
-        background-image: url('/h2Underline.svg'); /* Replace with your image path */
+        bottom: -65px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 25%;
+        height: 110px;
+        background-image: url('/h2Underline.svg');
         background-repeat: no-repeat;
-        background-size: contain; /* Adjust as needed */
-        background-position: center; /* Adjust as needed */
+        background-size: contain;
+        background-position: center;
       }
     }
     .cards {

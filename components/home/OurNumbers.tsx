@@ -45,25 +45,28 @@ function useInView(options = {}) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
+  const element = ref.current;
+  if (!element) return;
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
       if (entry.isIntersecting && !isInView) {
         setIsInView(true);
       }
-    }, {
+    },
+    {
       threshold: 0.3,
       ...options,
-    });
-
-    if (ref.current) {
-      observer.observe(ref.current);
     }
+  );
 
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [isInView, options]);
+  observer.observe(element);
+
+  return () => {
+    observer.unobserve(element);
+  };
+}, [isInView, options]);
+
 
   return { ref, isInView };
 }

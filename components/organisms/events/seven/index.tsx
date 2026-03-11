@@ -2,7 +2,7 @@ import Image from 'next/image'
 import styles from './seven.module.scss'
 import { content } from '../../../../constants/content'
 import Button from '../../../atoms/button'
-import VolunteerModal from '../../../organisms/volunteerModal'
+//import VolunteerModal from '../../../organisms/volunteerModal'
 import { useState } from 'react'
 import animationData from '../../../../public/90428.json'
  
@@ -14,7 +14,7 @@ const Lottie = dynamic(() => import('lottie-react'), {
 })
 
 const Index = () => {
-  const [isOpen, setIsOpen] = useState(false)
+   
   return (
     <>
       <section className={`${styles['outer-wrapper']} d-none d-lg-block`}>
@@ -34,14 +34,17 @@ const Index = () => {
             <h3>{content?.events?.seven?.h3}</h3>
             <p>{content?.events?.seven?.p}</p>
             <Button
-              text={content?.events?.seven?.button?.text}
-              type={content?.events?.seven?.button?.type}
-              onClick={() => {
-                setIsOpen(true)
-              }}
-              height={content?.events?.seven?.button?.height}
-              width={content?.events?.seven?.button?.width}
-            />
+  text={content?.events?.seven?.button?.text}
+  type={content?.events?.seven?.button?.type}
+  onClick={() => {
+    window.open(
+      "https://docs.google.com/forms/d/e/1FAIpQLSeF6y7Y9qyuZleoBMi8XTe3Kfj708MfEJSdMa-x3p0NnJe9dw/viewform",
+      "_blank"
+    )
+  }}
+  height={content?.events?.seven?.button?.height}
+  width={content?.events?.seven?.button?.width}
+/>
           </div>
         </div>
       </section>
@@ -63,24 +66,22 @@ const Index = () => {
             <h3>{content?.events?.seven?.h3}</h3>
             <p>{content?.events?.seven?.p}</p>
             <Button
-              text={content?.events?.seven?.button?.text}
-              type={content?.events?.seven?.button?.type}
-              onClick={() => {
-                setIsOpen(true)
-              }}
-              height={content?.events?.seven?.button?.height}
-              width={content?.events?.seven?.button?.width}
-            />
+  text={content?.events?.seven?.button?.text}
+  type={content?.events?.seven?.button?.type}
+  onClick={() => {
+    window.open(
+      "https://docs.google.com/forms/d/e/1FAIpQLSeF6y7Y9qyuZleoBMi8XTe3Kfj708MfEJSdMa-x3p0NnJe9dw/viewform",
+      "_blank"
+    )
+  }}
+  height={content?.events?.seven?.button?.height}
+  width={content?.events?.seven?.button?.width}
+/>
           </div>
         </div>
       </section>
       </Container>
-      <VolunteerModal
-        isOpen={isOpen}
-        onClose={() => {
-          setIsOpen(false)
-        }}
-      />
+       
     </>
   )
 }

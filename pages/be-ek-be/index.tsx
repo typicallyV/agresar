@@ -5,6 +5,7 @@ import Three from '../../components/organisms/be-ek-be/three'
 import Four from '../../components/organisms/be-ek-be/four'
 import Eight from '../../components/organisms/home/eight'
 import Nine from '../../components/organisms/home/nine'
+import Six from '../../components/organisms/home/six'
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
       <One />
       <Two />
       <Three />
+      
       <Four />
       <Eight />
       <Nine />

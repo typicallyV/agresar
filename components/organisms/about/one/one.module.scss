@@ -1,6 +1,8 @@
 .outer-wrapper {
   width: 100%;
   background: #fff;
+  padding: 40px 20px;
+
   h1,
   h2,
   h3,
@@ -17,27 +19,112 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 40px;
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+    max-width: 550px;
+
+    h2 {
+      font-family: Axiforma Black;
+      font-size: 49px;
+      line-height: 54px;
+      color: #383336;
+    }
+
+    p {
+      font-family: Axiforma Medium;
+      font-size: 21px;
+      line-height: 35px;
+      color: #383336;
+    }
+  }
+
+   
+}
+
+/* -------- Tablet -------- */
+
+@media (max-width: 1024px) {
+  .outer-wrapper {
+    .inner-wrapper {
+      gap: 30px;
+    }
+
+    .left h2 {
+      font-size: 40px;
+      line-height: 45px;
+    }
+
+    .left p {
+      font-size: 18px;
+      line-height: 30px;
+    }
+  }
+  
+}
+
+/* -------- Mobile -------- */
+
+@media (max-width: 768px) {
+  .outer-wrapper {
+
+    .inner-wrapper {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      gap: 20px;
+    }
 
     .left {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 18px;
-      height: 700px;
+      height: auto;
+      align-items: center;
 
       h2 {
-        font-family: Axiforma Black;
-        font-size: 49px;
-        line-height: 54px;
-        color: #383336;
+        font-size: 32px;
+        line-height: 38px;
       }
 
       p {
-        font-family: Axiforma Medium;
-        font-size: 21px;
-        line-height: 35px;
-        color: #383336;
+        font-size: 16px;
+        line-height: 26px;
+        max-width: 90%;
       }
     }
+
+     
+  }
+}
+.right {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 280px;
+    height: auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .right img {
+    width: 880px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .right img {
+    width: 900px;
+  }
+}
+
+@media (max-width: 768px) {
+  .right img {
+    width: 780px;
   }
 }

@@ -1,31 +1,54 @@
 import Layout from '../../components/layout'
-import Seven from '../../components/organisms/home/seven'
-import Eight from '../../components/organisms/home/eight'
-import Nine from '../../components/organisms/home/nine'
+
+/* Events Sections */
 import One from '../../components/organisms/events/one'
 import ImageContentLayout from '../../components/organisms/events/imageContentLayout'
 import SevenEvents from '../../components/organisms/events/seven'
+
+/* Be Ek Be Section */
+import Four from '../../components/organisms/be-ek-be/four'
+
+/* Home Sections */
+import Three from '../../components/organisms/home/three'
+import Six from '../../components/organisms/home/six'
+import Seven from '../../components/organisms/home/seven'
+import Eight from '../../components/organisms/home/eight'
+import Nine from '../../components/organisms/home/nine'
+
 import { content } from '../../constants/content'
 
 const Index = () => {
   return (
     <Layout>
+
+      {/* 1 */}
       <One />
-      <ImageContentLayout content={content?.events?.two} reverse />
+
+       
+
+      {/* 3 */}
       <ImageContentLayout
         content={content?.events?.three}
         background="#FFFCF3"
       />
-      <ImageContentLayout content={content?.events?.four} reverse />
-      <SevenEvents />
-      <ImageContentLayout
-        content={content?.events?.five}
+<ImageContentLayout
+        content={content?.events?.six}
         background="#FFFCF3"
       />
-      <ImageContentLayout content={content?.events?.six} reverse />
+      {/* 4 */}
+      
+
+     
+
+       
+
+      {/* 7 */}
+      <SevenEvents />
+      
       <Seven />
       <Eight />
       <Nine />
+
     </Layout>
   )
 }

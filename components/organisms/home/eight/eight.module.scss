@@ -2,39 +2,10 @@
   width: 100%;
   background: #fff;
 
-  /* Hide the scroll bar */
-  ::-webkit-scrollbar {
-    width: 0.5em; /* Adjust the width as needed */
-  }
-
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: transparent; /* Set the track background color */
-  }
-
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: transparent; /* Set the handle background color */
-  }
-
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: transparent; /* Set the handle background color on hover */
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  p {
-    margin: 0;
-    padding: 0;
-  }
-
   .inner-wrapper {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 80px 0;
 
     h2 {
       font-family: Axiforma Black;
@@ -44,82 +15,122 @@
       margin-bottom: 70px;
       text-align: center;
       margin-bottom: 76px;
+
       position: relative;
 
       &::after {
-        content: '';
-        position: absolute;
-        bottom: -55px;
-        left: 38%;
-        width: 20%; /* Adjust the width of the line */
-        height: 100px;
-        background-image: url('/h2Underline.svg'); /* Replace with your image path */
-        background-repeat: no-repeat;
-        background-size: contain; /* Adjust as needed */
-        background-position: center; /* Adjust as needed */
-      }
+  content: "";
+  position: absolute;
+  bottom: -90px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35%;
+  height: 150px;
+  background-image: url(/h2Underline.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
     }
+    .sub-heading {
+      text-align: center;
+      width: 60%;
+      margin: 0 auto 50px;
+      font-weight: 600;
+    }
+
     .content {
-      width: 100%;
-      position: relative;
+  overflow: hidden;
+  position: relative;
+}
 
-      .left-arrow {
-        position: absolute;
-        left: 2%;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
+/* ===== SLIDER WRAPPER ===== */
+.slider {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* ===== TRACK (MOVING PART) ===== */
+.track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: infiniteScroll 30s linear infinite;
+}
+
+/* Pause on hover (professional feel) */
+.slider:hover .track {
+  animation-play-state: paused;
+}
+
+/* ===== CARD ===== */
+.card-inner {
+  width: 380px;
+  padding: 30px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.review {
+  font-size: 17px;
+  line-height: 28px;
+  color: #383336;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+
+  .dp {
+    border-radius: 50%;
+  }
+
+  .name {
+    font-weight: 600;
+    font-size: 16px;
+  }
+}
+
+/* ===== INFINITE ANIMATION ===== */
+@keyframes infiniteScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+  }
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 768px) {
+  .outer-wrapper {
+    .inner-wrapper {
+      padding: 50px 20px;
+
+      h2 {
+        font-size: 32px;
       }
 
-      .right-arrow {
-        position: absolute;
-        right: 2%;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
-      }
-
-      .items {
-        padding: 20px;
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        max-width: 980px;
-        margin: 0 auto;
-        overflow: scroll;
-        scroll-behavior: smooth;
-      }
-
-      .item {
+      .sub-heading {
         width: 100%;
-        height: 100%;
-        padding: 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+      }
 
-        .review {
-          font-family: Axiforma Regular;
-          font-size: 18px;
-          line-height: 35px;
-          color: #383336;
+      .content {
+        .card-inner {
+          width: 280px;
+          padding: 20px;
         }
 
-        .dp {
-          border-radius: 50%;
-          border: #707070 solid 1px;
-        }
-
-        .profile {
-          display: flex;
-          justify-content: flex-end;
-          gap: 8px;
-          align-items: center;
-          .name {
-            font-family: Axiforma Bold;
-            line-height: 26px;
-            font-size: 19px;
-          }
+        .left-arrow,
+        .right-arrow {
+          display: none;
         }
       }
     }

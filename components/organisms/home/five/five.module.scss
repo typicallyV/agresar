@@ -1,66 +1,72 @@
 .outer-wrapper {
   width: 100%;
   background: #fff;
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  p {
-    margin: 0;
-    padding: 0;
-  }
+  overflow-x: hidden;
+
   .inner-wrapper {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
+  }
 
-    h2 {
-      font-family: Axiforma Black;
-      font-size: 49px;
-      line-height: 54px;
-      text-align: center;
-      margin-bottom: 100px;
-      color: #383336;
+  .content {
+    display: flex;
+    gap: 60px;
 
-      position: relative;
-
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -50px;
-        left: 45%;
-        width: 200px; /* Adjust the width of the line */
-        height: 100px;
-        background-image: url('/h2Underline.svg'); /* Replace with your image path */
-        background-repeat: no-repeat;
-        background-size: contain; /* Adjust as needed */
-        background-position: center; /* Adjust as needed */
-      }
-    }
-
-    .content {
-      display: flex;
-      gap: 66px;
-      
-      @media only screen and (max-width: 768px) {
-        .left, .right {
-          width: 100%;
-        }
-        .right {
-          display: none;
-        }
-      }
-
-    }
-    .left {
-      display: flex;
+    @media (max-width: 768px) {
       flex-direction: column;
-      gap: 20px;
-      //height: 500px;
-      width: 50%;
     }
+  }
+
+  .left,
+  .right {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* ================= DESKTOP IMAGE ================= */
+
+  .right {
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .right img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .right:hover img {
+      transform: scale(1.08);
+    }
+  }
+
+  /* ================= MOBILE IMAGE ================= */
+
+  .mobileImage {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+
     .right {
-      width: 50%;
+      display: none; // hide desktop image
+    }
+
+    .mobileImage {
+      display: block;
+      margin-top: 20px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .mobileImage img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
   }
 }

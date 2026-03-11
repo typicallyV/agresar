@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode, useState } from 'react'
+import { FunctionComponent, ReactNode, useState, useEffect } from 'react'
 import Navbar from '../../components/molecules/navbar'
 import Footer from '../../components/organisms/footer'
 import Button from '../../components/atoms/button'
@@ -9,37 +9,43 @@ interface Props {
 }
 
 const Layout: FunctionComponent<Props> = ({ children }) => {
+
   const [hovered, setHovered] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
-  const handleMouseEnter = () => {
-    setHovered(true)
-  }
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
 
-  const handleMouseLeave = () => {
-    setHovered(false)
-  }
+    checkScreen()
+    window.addEventListener('resize', checkScreen)
+
+    return () => window.removeEventListener('resize', checkScreen)
+  }, [])
+
   return (
     <div>
+
+      {/* Donate Button */}
+
       <div
         style={{
           position: 'fixed',
-          top: '300px',
+          top: isMobile ? '85%' : '300px',
           right: '0',
-          rotate: '90deg',
-          // transformOrigin: 'top right',
+          transform: isMobile ? 'rotate(0deg)' : 'rotate(90deg)',
           zIndex: 9999,
-          boxShadow: hovered ? '0px 4px 4px rgba(0, 0, 0, 0.25)' : 'none',
+          boxShadow: hovered ? '0px 4px 4px rgba(0,0,0,0.25)' : 'none'
         }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
         <Button
           text="Donate now"
           type="primary"
-          onClick={() => {
-            setIsOpen(true)
-          }}
+          onClick={() => setIsOpen(true)}
           customStyles={{ borderRadius: '0' }}
         />
       </div>
@@ -47,13 +53,14 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
       <Navbar />
 
       <main>{children}</main>
+
       <Footer />
+
       <DonationModal
         isOpen={isOpen}
-        onClose={() => {
-          setIsOpen(false)
-        }}
+        onClose={() => setIsOpen(false)}
       />
+
     </div>
   )
 }

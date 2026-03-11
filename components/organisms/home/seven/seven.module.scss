@@ -28,27 +28,47 @@
       position: relative;
 
       &::after {
-        content: '';
-        position: absolute;
-        bottom: -55px;
-        left: 50%;
-        width: 200px; /* Adjust the width of the line */
-        height: 100px;
-        background-image: url('/h2Underline.svg'); /* Replace with your image path */
-        background-repeat: no-repeat;
-        background-size: contain; /* Adjust as needed */
-        background-position: center; /* Adjust as needed */
-      }
+  content: "";
+  position: absolute;
+  bottom: -85px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35%;
+  height: 150px;
+  background-image: url(/h2Underline.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
     }
     .content {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      margin-bottom: 130px;
-      @media only screen and (max-width: 600px) {
-        flex-direction: column;
-        align-items: center;
-      }
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  margin-bottom: 100px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  & > * {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  /* Desktop hover only */
+  @media (hover: hover) and (pointer: fine) {
+    & > *:hover {
+      transform: scale(1.12);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
     }
+  }
+
+  /* Mobile tap effect */
+  & > *:active {
+    transform: scale(0.96);
+  }
+}
   }
 }
