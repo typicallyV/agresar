@@ -663,12 +663,7 @@ width: 450,
     two: {
       h2: 'WHAT IS बे एके बे ?',
       p: 'At Agresar Foundation, we celebrate the National Mathematics day on a Birth Anniversary of the great Indian mathematician Dr. Srinivasa Ramanujan. He was elected as a fellow at Trinity College, Cambridge and made a great contribution in the field of mathematics. Some of his well known contributions are Complex Analysis, Number Theory, Infinite Series Continued Fraction, etc. <br/> Agresar Foundation organizes an event named बे एके बे every year. Under an umbrella of the बे एके बे event we carry out various competitions, expert guest guidance lectures, etc. to increase the curiosity of students as well as spread mathematical awareness among the general public.',
-      img: {
-        src: '/assets/be-ek-be/two/two.png',
-        alt: 'beEkBeTwo',
-        height: 586,
-        width: 1200,
-      },
+      
     },
     three: {
       h2: 'Number of participants',

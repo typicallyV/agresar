@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic'
 const Lottie = dynamic(() => import('lottie-react'), {
   ssr: false,
 })
+
 const Index = () => {
   return (
     <>
@@ -26,11 +27,23 @@ const Index = () => {
             height={content?.['be-ek-be']?.two?.img?.height}
           />
         </div>
-        { <div style={{width: 1000, height: 700, display: 'flex', alignItems: 'center', margin: 'auto'}}>
-          <div style={{ width: '100%', height: '50%' }}>
+
+        {/* Lottie + overlaid logo cards */}
+        <div className={styles['lottie-section']}>
+          <div className={styles['lottie-wrapper']}>
             <Lottie animationData={animationData} loop={true} />
           </div>
-        </div> }
+
+          {/* Left logo — sits inside left loop */}
+          <div className={`${styles['logo-card']} ${styles['logo-left']}`}>
+            <img src=" assets\home\seven\eSthree.png" alt="eStree - Empowering Women" />
+          </div>
+
+          {/* Right logo — sits inside right loop */}
+          <div className={`${styles['logo-card']} ${styles['logo-right']}`}>
+            <img src="assets\home\seven\nFirst.png" alt="Nation First" />
+          </div>
+        </div>
       </section>
     </>
   )

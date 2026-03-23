@@ -12,7 +12,7 @@ const Index = () => {
     <Layout>
       <One />
       <Two />
-      <Three />
+    <Three />
       
       <Four />
       <Eight />

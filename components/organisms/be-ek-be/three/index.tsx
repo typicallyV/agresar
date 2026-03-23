@@ -7,29 +7,28 @@ const Index = () => {
   const targetRef = useRef<HTMLDivElement>(null)
   const [isIntersecting, setIsIntersecting] = useState(false)
 
-  // ...existing code...
-useEffect(() => {
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setIsIntersecting(entry.isIntersecting)
-      }
-    },
-    { threshold: 0.1 }
-  )
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsIntersecting(entry.isIntersecting)
+        }
+      },
+      { threshold: 0.1 }
+    )
 
-  const currentTarget = targetRef.current;  // Capture the ref value here
-  if (currentTarget) {
-    observer.observe(currentTarget)
-  }
-
-  return () => {
-    if (currentTarget) {  // Use the captured value in cleanup
-      observer.unobserve(currentTarget)
+    const currentTarget = targetRef.current
+    if (currentTarget) {
+      observer.observe(currentTarget)
     }
-  }
-}, [])
-// ...existing code...
+
+    return () => {
+      if (currentTarget) {
+        observer.unobserve(currentTarget)
+      }
+    }
+  }, [])
+
   return (
     <>
       <section className={styles?.['outer-wrapper']}>
@@ -61,12 +60,15 @@ useEffect(() => {
               __html: content?.['be-ek-be']?.three?.p,
             }}
           ></p>
+
+          {/* Banner: use width/height only as aspect-ratio hint, CSS controls display size */}
           <div className={styles['banner-container']}>
             <Image
               src={content?.['be-ek-be']?.three?.img?.src}
               alt={content?.['be-ek-be']?.three?.img?.alt}
-              width={content?.['be-ek-be']?.three?.img?.width}
-              height={content?.['be-ek-be']?.three?.img?.height}
+              width={1200}
+              height={600}
+              style={{ width: '100%', height: 'auto' }}
             />
           </div>
         </div>

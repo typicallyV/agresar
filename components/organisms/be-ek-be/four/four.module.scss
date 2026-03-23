@@ -1,76 +1,147 @@
 .outer-wrapper {
-  h1,
+  width: 100%;
+  background-color: #fff;
+  padding: 60px 20px 100px;
+
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+
   h2,
-  h3,
-  h4,
-  h5,
-  h6,
   p {
     margin: 0;
-    padding: 0;
   }
 
-  width: 100%;
-  height: 1244px;
-  padding: 120px 0;
-  background-image: url('/bg.png');
-
-  //   .inner-wrapper {
-  width: 100%;
-  display: flex;
-  gap: 20px;
-  overflow: hidden;
-
-  /* center all columns by default */
-  justify-content: center;
-
-  /* override centering for the first and last column */
-  > div:first-child,
-  > div:last-child {
-    justify-content: center;
-  }
-
-  .center {
-    justify-content: center;
-  }
-
-  .right {
-    justify-content: flex-end;
-  }
-
-  .left {
-    justify-content: flex-start;
-  }
-
+  /* Each gallery card base style */
   > div {
+    > div {
+      border-radius: 16px;
+      overflow: hidden;
+      min-height: 200px;
+      height: 100%;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  .profile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 16px;
+    background: linear-gradient(0deg, rgba(0,0,0,0.65) 0%, transparent 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    p {
+      font-family: Axiforma Regular, sans-serif;
+      font-size: 13px;
+      line-height: 18px;
+      color: #fff;
+    }
+  }
+
+  /* Left column — 2 stacked cards */
+  .left {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    height: 100%;
+    gap: 16px;
 
-    div {
-      height: 514px;
-      width: 353px;
-      //   border: 1px solid black;
-      cursor: pointer;
+    > div {
+      flex: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      min-height: 180px;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+  }
 
-      .profile {
-        display: flex;
-        justify-content: space-between;
-        position: absolute;
-        bottom: -424px;
-        padding: 0 20px;
-        gap: 60px;
+  /* Center column — 2 stacked cards */
+  .center {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 
-        p {
-          font-family: Axiforma Medium;
-          font-size: 18px;
-          line-height: 25px;
-          color: #fff;
-        }
+    > div {
+      flex: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      min-height: 220px;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  /* Right column — 2 stacked cards */
+  .right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    > div {
+      flex: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      min-height: 180px;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  /* Single top card */
+  > div:first-child {
+    grid-column: 1 / -1;
+
+    > div {
+      border-radius: 16px;
+      overflow: hidden;
+      min-height: 160px;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  /* Single bottom card */
+  > div:last-child {
+    grid-column: 1 / -1;
+
+    > div {
+      border-radius: 16px;
+      overflow: hidden;
+      min-height: 160px;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    padding: 40px 16px 60px;
+
+    > div:first-child,
+    > div:last-child {
+      grid-column: 1 / -1;
+    }
+
+    .left,
+    .center,
+    .right {
+      > div {
+        min-height: 200px;
       }
     }
   }
 }
-// }
