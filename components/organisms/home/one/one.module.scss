@@ -1,6 +1,7 @@
 .outer-wrapper {
   width: 100%;
   background: #fff;
+
   h1,
   h2,
   h3,
@@ -14,22 +15,22 @@
   .inner-wrapper {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    @media only screen and (max-width: 768px) {
-   
+    /* Tablet */
+    @media (max-width: 768px) {
       flex-direction: column-reverse;
-
-      .left {
-        max-height: 350px;
-        justify-content: start;
-        margin-top: 30px;
-        margin-bottom: 30px;
-      }
+      text-align: center;
+      gap: 20px;
     }
 
+    /* Phone */
+    @media (max-width: 480px) {
+      padding: 15px;
+    }
 
     .left {
       display: flex;
@@ -38,6 +39,14 @@
       gap: 18px;
       height: 700px;
 
+      /* Tablet */
+      @media (max-width: 768px) {
+        height: auto;
+        max-height: none;
+        margin: 30px 0;
+        align-items: center;
+      }
+
       h2 {
         font-family: Axiforma Black;
         font-size: 49px;
@@ -45,18 +54,38 @@
         color: #383336;
         position: relative;
 
+        /* Tablet */
+        @media (max-width: 768px) {
+          font-size: 36px;
+          line-height: 42px;
+        }
+
+        /* Phone */
+        @media (max-width: 480px) {
+          font-size: 28px;
+          line-height: 34px;
+        }
+
         span {
           &::after {
             content: '';
             position: absolute;
-            bottom: -55px;
-            left: 25%;
-            width: 200px; /* Adjust the width of the line */
+            bottom: -60px;
+            left: 0.1%;
+            width: 300px;
             height: 100px;
-            background-image: url('/h2Underline.svg'); /* Replace with your image path */
+            background-image: url('/h2Underline.svg');
             background-repeat: no-repeat;
-            background-size: contain; /* Adjust as needed */
-            background-position: center; /* Adjust as needed */
+            background-size: contain;
+            background-position: center;
+
+            /* Phone fix */
+            @media (max-width: 480px) {
+              width: 140px;
+              bottom: -50px;
+              left: 50%;
+              transform: translateX(-50%);
+            }
           }
         }
       }
@@ -66,11 +95,29 @@
         font-size: 21px;
         line-height: 35px;
         color: #383336;
+
+        /* Tablet */
+        @media (max-width: 768px) {
+          font-size: 18px;
+          line-height: 28px;
+        }
+
+        /* Phone */
+        @media (max-width: 480px) {
+          font-size: 16px;
+          line-height: 24px;
+        }
       }
     }
 
     .right {
       width: 100%;
+
+      img {
+        width: 100%;
+        height: auto;
+        max-width: 500px;
+      }
     }
   }
 }

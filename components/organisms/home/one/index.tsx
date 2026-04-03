@@ -22,13 +22,7 @@ const Index = () => {
                 __html: content.home.one.left.p.dangerouslySetInnerHTML,
               }}
             ></p>
-            <Button
-              text={content.home.one.left.button.text}
-              type={content.home.one.left.button.type}
-              onClick={() => {
-                setIsOpen(true)
-              }}
-            />
+             
           </div>
           <div className={styles['right']}>
             <Image

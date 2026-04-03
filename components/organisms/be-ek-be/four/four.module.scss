@@ -1,147 +1,194 @@
-.outer-wrapper {
+.outerWrapper {
   width: 100%;
-  background-color: #fff;
-  padding: 60px 20px 100px;
+  background: #fff;
+  padding: 80px 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: auto;
-  gap: 16px;
-  max-width: 1200px;
+  @media (max-width: 768px) {
+    padding: 48px 0;
+    gap: 18px;
+  }
+}
+
+// ── Video ──────────────────────────────────────
+.videoWrapper {
+  position: relative;
+  width: min(820px, 88%);
   margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #111;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 
-  h2,
-  p {
-    margin: 0;
+  @media (max-width: 768px) {
+    width: 92%;
+    border-radius: 12px;
+  }
+}
+
+.video {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 500px;
+  object-fit: contain;
+
+  @media (max-width: 768px) {
+    max-height: 240px;
+  }
+}
+
+.playBtn {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.playing .playBtnCircle {
+    opacity: 0;
   }
 
-  /* Each gallery card base style */
-  > div {
-    > div {
-      border-radius: 16px;
-      overflow: hidden;
-      min-height: 200px;
-      height: 100%;
-      position: relative;
-      background-size: cover;
-      background-position: center;
-    }
+  &.playing:hover .playBtnCircle {
+    opacity: 1;
+  }
+}
+
+.playBtnCircle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, opacity 0.25s ease, background 0.2s ease;
+
+  .playBtn:hover & {
+    transform: scale(1.08);
+    background: rgba(0, 0, 0, 0.65);
   }
 
-  .profile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 12px 16px;
-    background: linear-gradient(0deg, rgba(0,0,0,0.65) 0%, transparent 100%);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
+  @media (max-width: 768px) {
+    width: 52px;
+    height: 52px;
+  }
+}
 
-    p {
-      font-family: Axiforma Regular, sans-serif;
-      font-size: 13px;
-      line-height: 18px;
-      color: #fff;
-    }
+// ── Sliding tracks ─────────────────────────────
+.trackWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.track {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  animation: scrollLeft 28s linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
   }
 
-  /* Left column — 2 stacked cards */
-  .left {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  &.reverse {
+    animation: scrollRight 34s linear infinite;
 
-    > div {
-      flex: 1;
-      border-radius: 16px;
-      overflow: hidden;
-      min-height: 180px;
-      position: relative;
-      background-size: cover;
-      background-position: center;
-    }
-  }
-
-  /* Center column — 2 stacked cards */
-  .center {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    > div {
-      flex: 1;
-      border-radius: 16px;
-      overflow: hidden;
-      min-height: 220px;
-      position: relative;
-      background-size: cover;
-      background-position: center;
-    }
-  }
-
-  /* Right column — 2 stacked cards */
-  .right {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    > div {
-      flex: 1;
-      border-radius: 16px;
-      overflow: hidden;
-      min-height: 180px;
-      position: relative;
-      background-size: cover;
-      background-position: center;
-    }
-  }
-
-  /* Single top card */
-  > div:first-child {
-    grid-column: 1 / -1;
-
-    > div {
-      border-radius: 16px;
-      overflow: hidden;
-      min-height: 160px;
-      position: relative;
-      background-size: cover;
-      background-position: center;
-    }
-  }
-
-  /* Single bottom card */
-  > div:last-child {
-    grid-column: 1 / -1;
-
-    > div {
-      border-radius: 16px;
-      overflow: hidden;
-      min-height: 160px;
-      position: relative;
-      background-size: cover;
-      background-position: center;
+    &:hover {
+      animation-play-state: paused;
     }
   }
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    padding: 40px 16px 60px;
+    gap: 10px;
+    animation-duration: 18s;
 
-    > div:first-child,
-    > div:last-child {
-      grid-column: 1 / -1;
-    }
-
-    .left,
-    .center,
-    .right {
-      > div {
-        min-height: 200px;
-      }
+    &.reverse {
+      animation-duration: 22s;
     }
   }
+}
+
+.card {
+  flex-shrink: 0;
+  width: 300px;
+  height: 200px;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+
+  &:hover .cardImg {
+    transform: scale(1.05);
+  }
+
+  &:hover .overlay {
+    opacity: 1;
+  }
+
+  &:hover .logoBadge {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    width: 180px;
+    height: 120px;
+    border-radius: 10px;
+  }
+}
+
+.cardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.logoBadge {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+@keyframes scrollLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.333%); }
+}
+
+@keyframes scrollRight {
+  from { transform: translateX(-33.333%); }
+  to   { transform: translateX(0); }
 }

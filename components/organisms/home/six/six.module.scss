@@ -1,73 +1,118 @@
 .outer-wrapper {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p {
-    margin: 0;
-    padding: 0;
-  }
-
   width: 100%;
-  height: 1244px;
-  margin: 120px 0;
+  overflow: hidden;
+  padding: 60px 0;
   background: #fff;
+  margin: 120px 0;
 
+  @media (max-width: 768px) {
+    margin: 60px 0;
+    padding: 32px 0;
+  }
+}
+
+.track-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    gap: 12px;
+  }
+}
+
+.track {
   display: flex;
   gap: 20px;
-  overflow: hidden;
+  width: max-content;
+  animation: scroll-left 35s linear infinite;
 
-  /* center all columns by default */
-  justify-content: center;
-
-  /* override centering for the first and last column */
-  > div:first-child,
-  > div:last-child {
-    justify-content: center;
+  &:hover {
+    animation-play-state: paused;
   }
 
-  .center {
-    justify-content: center;
-  }
+  &.reverse {
+    animation: scroll-right 42s linear infinite;
 
-  .right {
-    justify-content: flex-end;
-  }
-
-  .left {
-    justify-content: flex-start;
-  }
-
-  > div {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 800px;
-    height: 1000px;
-
-    div {
-      height: 514px;
-      width: 400px;
-      //   border: 1px solid black;
-      cursor: pointer;
-
-      .profile {
-        display: flex;
-        justify-content: space-between;
-        position: absolute;
-        bottom: -424px;
-        padding: 0 20px;
-        gap: 60px;
-
-        p {
-          font-family: Axiforma Medium;
-          font-size: 18px;
-          line-height: 25px;
-          color: #fff;
-        }
-      }
+    &:hover {
+      animation-play-state: paused;
     }
   }
+
+  @media (max-width: 768px) {
+    gap: 12px;
+    animation-duration: 22s;
+
+    &.reverse {
+      animation-duration: 28s;
+    }
+  }
+}
+
+.card {
+  flex-shrink: 0;
+  width: 400px;
+  height: 514px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+
+  &:hover .cardBg {
+    transform: scale(1.05);
+  }
+
+  &:hover .overlay {
+    opacity: 1;
+  }
+
+  &:hover .profile {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 1024px) {
+    width: 300px;
+    height: 380px;
+  }
+
+  @media (max-width: 768px) {
+    width: 220px;
+    height: 280px;
+  }
+}
+
+.cardBg {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes scroll-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 
 const VideoPlayer = () => {
     return (
@@ -11,10 +11,9 @@ const VideoPlayer = () => {
       </div>
     );
   };
-  
-  export default VideoPlayer;
-
-  /*import React from "react";
+  */
+ 
+import React from "react";
 import styles from "./eight.module.scss";
 
 const VideoPlayer = () => {
@@ -35,4 +34,4 @@ const VideoPlayer = () => {
   );
 };
 
-export default VideoPlayer;*/
+export default VideoPlayer;

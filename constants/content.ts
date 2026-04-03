@@ -26,14 +26,11 @@ export const content = {
           dangerouslySetInnerHTML:
             'At Agresar, we believe every small act of kindness matters. We bring people together, turning individual effort into real, meaningful change for those who need it most.',
         },
-        button: {
-          type: 'primary',
-          text: 'Know More',
-        },
+        
       },
       right: {
         img: {
-          src: '/assets/home/one/right.png',
+          src: '/assets/home/one/Untitled.png',
           alt: 'homeright',
            width: 2500, 
          height: 2580,
