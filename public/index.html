@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="NGO Admin Portal — Secure internal dashboard for managing volunteers, members, events, donations, files and notes."/>
+  <title>NGO Admin Portal</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <!-- CryptoJS for client-side AES encryption of notes -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ══════════════════ LOGIN PAGE ══════════════════ -->
+<div id="login-page" class="page active">
+  <div class="login-bg">
+    <div class="login-orb orb1"></div>
+    <div class="login-orb orb2"></div>
+    <div class="login-orb orb3"></div>
+  </div>
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="logo-icon">🌿</div>
+      <h1 class="login-title">NGO Admin</h1>
+      <p class="login-subtitle">Secure Administrative Portal</p>
+    </div>
+    <form id="login-form" novalidate>
+      <div class="form-group">
+        <label for="login-username">Username</label>
+        <div class="input-wrap">
+          <span class="input-icon">👤</span>
+          <input type="text" id="login-username" placeholder="Enter username" autocomplete="username" required/>
+        </div>
+        <span class="field-error" id="err-username"></span>
+      </div>
+      <div class="form-group">
+        <label for="login-password">Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔒</span>
+          <input type="password" id="login-password" placeholder="Enter password" autocomplete="current-password" required/>
+          <button type="button" class="toggle-pw" id="toggle-pw" aria-label="Toggle password visibility">👁</button>
+        </div>
+        <span class="field-error" id="err-password"></span>
+      </div>
+      <div class="form-error" id="login-error"></div>
+      <button type="submit" class="btn btn-primary btn-full" id="login-btn">
+        <span class="btn-text">Sign In</span>
+        <span class="btn-spinner hidden">⏳</span>
+      </button>
+    </form>
+    <p class="login-footer">End-to-end encrypted · Session expires in 8 hours</p>
+  </div>
+</div>
+
+<!-- ══════════════════ MAIN APP ══════════════════ -->
+<div id="app-page" class="page">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">🌿</div>
+      <div>
+        <div class="sidebar-title">NGO Admin</div>
+        <div class="sidebar-user" id="sidebar-user">admin</div>
+      </div>
+      <button class="sidebar-toggle" id="sidebar-close" aria-label="Close sidebar">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="dashboard">
+        <span class="nav-icon">📊</span><span class="nav-label">Dashboard</span>
+      </a>
+      <a href="#" class="nav-item" data-page="volunteers">
+        <span class="nav-icon">🙋</span><span class="nav-label">Volunteers</span>
+      </a>
+      <a href="#" class="nav-item" data-page="members">
+        <span class="nav-icon">👥</span><span class="nav-label">Members</span>
+      </a>
+      <a href="#" class="nav-item" data-page="events">
+        <span class="nav-icon">📅</span><span class="nav-label">Events</span>
+      </a>
+      <a href="#" class="nav-item" data-page="donations">
+        <span class="nav-icon">💛</span><span class="nav-label">Donations</span>
+      </a>
+      <a href="#" class="nav-item" data-page="uploads">
+        <span class="nav-icon">📁</span><span class="nav-label">Files & Media</span>
+      </a>
+      <a href="#" class="nav-item" data-page="notes">
+        <span class="nav-icon">📝</span><span class="nav-label">Notes</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn btn-outline btn-sm" id="logout-btn">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Open sidebar">☰</button>
+    <div class="topbar-title" id="topbar-title">Dashboard</div>
+    <div class="topbar-right">
+      <div class="enc-badge">🔐 Encrypted</div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- DASHBOARD -->
+    <section id="page-dashboard" class="content-section active">
+      <div class="page-header">
+        <h2>Overview</h2>
+        <p class="page-subtitle">Welcome back! Here's your NGO at a glance.</p>
+      </div>
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card" id="stat-volunteers">
+          <div class="stat-icon">🙋</div>
+          <div class="stat-num" id="stat-vol-num">—</div>
+          <div class="stat-label">Active Volunteers</div>
+        </div>
+        <div class="stat-card" id="stat-members">
+          <div class="stat-icon">👥</div>
+          <div class="stat-num" id="stat-mem-num">—</div>
+          <div class="stat-label">Active Members</div>
+        </div>
+        <div class="stat-card" id="stat-events">
+          <div class="stat-icon">📅</div>
+          <div class="stat-num" id="stat-evt-num">—</div>
+          <div class="stat-label">Total Events</div>
+        </div>
+        <div class="stat-card" id="stat-donations">
+          <div class="stat-icon">💛</div>
+          <div class="stat-num" id="stat-don-num">—</div>
+          <div class="stat-label">Total Donations (₹)</div>
+        </div>
+      </div>
+      <div class="dashboard-quick">
+        <h3>Quick Actions</h3>
+        <div class="quick-btns">
+          <button class="btn btn-primary" onclick="navigateTo('volunteers')">+ Add Volunteer</button>
+          <button class="btn btn-primary" onclick="navigateTo('members')">+ Add Member</button>
+          <button class="btn btn-primary" onclick="navigateTo('events')">+ Add Event</button>
+          <button class="btn btn-primary" onclick="navigateTo('donations')">+ Record Donation</button>
+          <button class="btn btn-secondary" onclick="navigateTo('notes')">📝 New Note</button>
+          <button class="btn btn-secondary" onclick="navigateTo('uploads')">📁 Upload File</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VOLUNTEERS -->
+    <section id="page-volunteers" class="content-section">
+      <div class="page-header">
+        <div>
+          <h2>Volunteers</h2>
+          <p class="page-subtitle">Manage your active volunteers</p>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-secondary" id="upload-csv-btn">📤 Upload CSV</button>
+          <input type="file" id="vol-csv-input" accept=".csv" style="display:none;" />
+          <button class="btn btn-primary" id="add-vol-btn">+ Add Volunteer</button>
+        </div>
+      </div>
+      <div id="vol-list" class="card-list"></div>
+    </section>
+
+    <!-- MEMBERS -->
+    <section id="page-members" class="content-section">
+      <div class="page-header">
+        <div>
+          <h2>Members</h2>
+          <p class="page-subtitle">Track all NGO members</p>
+        </div>
+        <button class="btn btn-primary" id="add-mem-btn">+ Add Member</button>
+      </div>
+      <div id="mem-list" class="card-list"></div>
+    </section>
+
+    <!-- EVENTS -->
+    <section id="page-events" class="content-section">
+      <div class="page-header">
+        <div>
+          <h2>Events</h2>
+          <p class="page-subtitle">Manage and track all events</p>
+        </div>
+        <button class="btn btn-primary" id="add-evt-btn">+ Add Event</button>
+      </div>
+      <div id="evt-list" class="card-list"></div>
+    </section>
+
+    <!-- DONATIONS -->
+    <section id="page-donations" class="content-section">
+      <div class="page-header">
+        <div>
+          <h2>Donations</h2>
+          <p class="page-subtitle">Record and track all contributions</p>
+        </div>
+        <button class="btn btn-primary" id="add-don-btn">+ Record Donation</button>
+      </div>
+      <div id="don-list" class="card-list"></div>
+    </section>
+
+    <!-- UPLOADS -->
+    <section id="page-uploads" class="content-section">
+      <div class="page-header">
+        <div>
+          <h2>Files & Media</h2>
+          <p class="page-subtitle">Upload and manage documents, photos, and folders</p>
+        </div>
+      </div>
+      <!-- Drop Zone -->
+      <div class="dropzone" id="dropzone">
+        <div class="dropzone-icon">📤</div>
+        <p class="dropzone-text">Drag & drop files here</p>
+        <p class="dropzone-sub">or</p>
+        <label class="btn btn-primary" for="file-input">Browse Files</label>
+        <input type="file" id="file-input" multiple hidden/>
+        <p class="dropzone-sub mt8">Supports: images, PDFs, docs, spreadsheets, zips · Max 50 MB each</p>
+      </div>
+      <div class="upload-desc-row">
+        <input type="text" id="upload-desc" placeholder="Optional description for these files" class="input-field"/>
+        <button class="btn btn-primary" id="do-upload-btn">Upload</button>
+      </div>
+      <div id="upload-preview" class="upload-preview"></div>
+      <!-- Filter tabs -->
+      <div class="filter-tabs" id="upload-filter-tabs">
+        <button class="tab-btn active" data-filter="all">All</button>
+        <button class="tab-btn" data-filter="photo">Photos</button>
+        <button class="tab-btn" data-filter="document">Documents</button>
+        <button class="tab-btn" data-filter="other">Other</button>
+      </div>
+      <div id="file-grid" class="file-grid"></div>
+    </section>
+
+    <!-- NOTES -->
+    <section id="page-notes" class="content-section">
+      <div class="page-header">
+        <div>
+          <h2>Notes</h2>
+          <p class="page-subtitle">🔐 AES-256 encrypted — only readable with your encryption key</p>
+        </div>
+        <button class="btn btn-primary" id="add-note-btn">+ New Note</button>
+      </div>
+      <!-- Encryption key derived automatically -->
+      <div id="enc-key-bar" style="display:none;"></div>
+      <span id="enc-status" style="display:none;"></span>
+      <!-- Filter -->
+      <div class="filter-tabs">
+        <button class="tab-btn active" data-filter="all" id="note-filter-all">All</button>
+        <button class="tab-btn" data-filter="pending" id="note-filter-pending">Pending</button>
+        <button class="tab-btn" data-filter="done" id="note-filter-done">Done ✓</button>
+      </div>
+      <div id="notes-list" class="notes-grid"></div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ══════════════════ MODALS ══════════════════ -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">Modal</h3>
+      <button class="modal-close" id="modal-close">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" id="modal-cancel">Cancel</button>
+      <button class="btn btn-primary" id="modal-submit">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast-container"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

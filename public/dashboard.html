@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seva Sangam — Admin Dashboard</title>
+  <meta name="description" content="NGO Admin Dashboard — Volunteers, Members, Events, Donations" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --saffron:    #FF6B00;
+      --saffron-lt: #FF9240;
+      --gold:       #FFB800;
+      --turmeric:   #F5A623;
+      --cream:      #FFF8EE;
+      --cream2:     #FFF3E0;
+      --brown:      #5C3A1E;
+      --bark:       #8B5C2A;
+      --green:      #2D6A4F;
+      --green-lt:   #40916C;
+      --red:        #C0392B;
+      --sidebar-bg: #1C0D00;
+      --sidebar-w:  260px;
+      --header-h:   68px;
+      --shadow:     rgba(92,58,30,0.14);
+      --card-bg:    rgba(255,255,255,0.92);
+    }
+
+    html, body { height: 100%; }
+    body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--brown); overflow-x: hidden; }
+
+    /* ── SIDEBAR ─────────────────────────────────────────────────── */
+    #sidebar {
+      position: fixed; top: 0; left: 0;
+      width: var(--sidebar-w); height: 100%;
+      background: var(--sidebar-bg);
+      display: flex; flex-direction: column;
+      z-index: 100;
+      transition: transform .3s ease;
+    }
+
+    .sidebar-header {
+      padding: 28px 22px 22px;
+      border-bottom: 1px solid rgba(255,107,0,0.15);
+    }
+    .sidebar-logo { display: flex; align-items: center; gap: 12px; }
+    .sidebar-logo .icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--saffron), var(--gold));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .sidebar-logo .texts strong { display: block; font-size: 17px; font-weight: 800; color: #fff; }
+    .sidebar-logo .texts span   { font-size: 10px; color: #e0a06a; letter-spacing: 1.5px; text-transform: uppercase; }
+
+    .sidebar-nav { flex: 1; padding: 16px 12px; overflow-y: auto; }
+    .nav-section-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 2px;
+      color: rgba(255,255,255,0.3); text-transform: uppercase;
+      padding: 16px 10px 8px;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 14px; border-radius: 10px;
+      cursor: pointer; margin-bottom: 2px;
+      font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.65);
+      transition: background .2s, color .2s;
+      user-select: none;
+    }
+    .nav-item .nav-icon { font-size: 18px; width: 24px; text-align: center; }
+    .nav-item:hover { background: rgba(255,107,0,0.12); color: #fff; }
+    .nav-item.active { background: linear-gradient(135deg, rgba(255,107,0,0.9), rgba(255,184,0,0.7)); color: #fff; font-weight: 700; box-shadow: 0 4px 14px rgba(255,107,0,0.3); }
+
+    .sidebar-footer {
+      padding: 16px 12px;
+      border-top: 1px solid rgba(255,107,0,0.1);
+    }
+    .btn-logout {
+      display: flex; align-items: center; gap: 10px;
+      width: 100%; padding: 11px 14px;
+      background: rgba(192,57,43,0.18); border: 1px solid rgba(192,57,43,0.3);
+      border-radius: 10px; color: #ff816e;
+      font-family: inherit; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-logout:hover { background: rgba(192,57,43,0.35); }
+
+    /* ── MAIN LAYOUT ─────────────────────────────────────────────── */
+    #main { margin-left: var(--sidebar-w); min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* ── HEADER ──────────────────────────────────────────────────── */
+    #header {
+      height: var(--header-h);
+      background: rgba(255,255,255,0.9); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,107,0,0.12);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px;
+      position: sticky; top: 0; z-index: 50;
+    }
+    .header-title { font-size: 20px; font-weight: 700; color: var(--brown); }
+    .header-title span { color: var(--saffron); }
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    .admin-chip {
+      display: flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--saffron), var(--gold));
+      color: #fff; font-size: 13px; font-weight: 700;
+      padding: 7px 14px; border-radius: 999px;
+    }
+    .datetime { font-size: 13px; color: var(--bark); font-weight: 500; }
+
+    /* ── CONTENT ──────────────────────────────────────────────────── */
+    #content { flex: 1; padding: 32px; }
+
+    .page { display: none; animation: fadeIn .35s ease; }
+    .page.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+    .page-title {
+      font-size: 26px; font-weight: 800; color: var(--brown); margin-bottom: 6px;
+    }
+    .page-subtitle { font-size: 14px; color: var(--bark); margin-bottom: 28px; }
+
+    /* ── STAT CARDS ───────────────────────────────────────────────── */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px; margin-bottom: 34px;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border-radius: 18px; padding: 22px 24px;
+      box-shadow: 0 4px 24px var(--shadow);
+      border: 1px solid rgba(255,107,0,0.1);
+      display: flex; flex-direction: column; gap: 10px;
+      transition: transform .2s, box-shadow .2s;
+      position: relative; overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      border-radius: 18px 18px 0 0;
+    }
+    .stat-card.saffron::before { background: linear-gradient(90deg, var(--saffron), var(--saffron-lt)); }
+    .stat-card.gold::before    { background: linear-gradient(90deg, var(--gold), #ffe066); }
+    .stat-card.green::before   { background: linear-gradient(90deg, var(--green), var(--green-lt)); }
+    .stat-card.bark::before    { background: linear-gradient(90deg, var(--bark), #c4904d); }
+
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px var(--shadow); }
+    .stat-icon { font-size: 32px; }
+    .stat-value { font-size: 38px; font-weight: 800; color: var(--brown); line-height: 1; }
+    .stat-label { font-size: 13px; font-weight: 600; color: var(--bark); text-transform: uppercase; letter-spacing: 0.8px; }
+
+    /* ── SECTION CARDS ────────────────────────────────────────────── */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px var(--shadow);
+      border: 1px solid rgba(255,107,0,0.1);
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+    .section-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 26px;
+      border-bottom: 1px solid rgba(255,107,0,0.1);
+    }
+    .section-head h2 { font-size: 17px; font-weight: 700; color: var(--brown); display: flex; align-items: center; gap: 8px; }
+    .badge {
+      background: linear-gradient(135deg, var(--saffron), var(--gold));
+      color: #fff; font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 999px;
+    }
+
+    /* ── BUTTONS ──────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 18px; border-radius: 10px;
+      font-family: inherit; font-size: 13.5px; font-weight: 600;
+      cursor: pointer; border: none; transition: all .2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--saffron), var(--gold));
+      color: #fff; box-shadow: 0 3px 14px rgba(255,107,0,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 5px 18px rgba(255,107,0,0.45); }
+    .btn-danger  { background: rgba(192,57,43,0.1); color: var(--red); border: 1px solid rgba(192,57,43,0.25); }
+    .btn-danger:hover  { background: rgba(192,57,43,0.2); }
+    .btn-sm { padding: 6px 12px; font-size: 12px; border-radius: 7px; }
+    .btn-ghost { background: var(--cream2); color: var(--bark); border: 1px solid rgba(139,92,42,0.2); }
+    .btn-ghost:hover { background: rgba(255,107,0,0.08); }
+    .btn-success { background: linear-gradient(135deg, var(--green), var(--green-lt)); color: #fff; box-shadow: 0 3px 12px rgba(45,106,79,0.35); }
+    .btn-success:hover { transform: translateY(-1px); }
+
+    /* ── TABLE ────────────────────────────────────────────────────── */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      text-align: left; padding: 12px 20px;
+      font-size: 11.5px; font-weight: 700; color: var(--bark);
+      letter-spacing: 1px; text-transform: uppercase;
+      background: rgba(255,107,0,0.04);
+      border-bottom: 1px solid rgba(255,107,0,0.12);
+    }
+    td { padding: 14px 20px; font-size: 14px; color: var(--brown); border-bottom: 1px solid rgba(255,107,0,0.06); vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,184,0,0.04); }
+
+    .pill {
+      display: inline-block; padding: 3px 10px;
+      border-radius: 999px; font-size: 11.5px; font-weight: 600;
+    }
+    .pill-green  { background: rgba(45,106,79,0.12); color: var(--green); }
+    .pill-orange { background: rgba(255,107,0,0.12); color: var(--saffron); }
+    .pill-gold   { background: rgba(255,184,0,0.15); color: #946800; }
+
+    .empty-state {
+      text-align: center; padding: 48px 20px;
+      color: var(--bark); font-size: 15px;
+    }
+    .empty-state .big { font-size: 44px; margin-bottom: 10px; }
+
+    /* ── MODAL ────────────────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(28,13,0,0.55); backdrop-filter: blur(4px);
+      z-index: 200; display: none;
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; animation: fadeIn .25s ease; }
+    .modal {
+      background: #fff; border-radius: 20px;
+      padding: 32px; width: 100%; max-width: 500px;
+      box-shadow: 0 20px 60px rgba(28,13,0,0.35);
+      position: relative;
+      animation: slideUp .3s cubic-bezier(.22,.8,.36,1) both;
+    }
+    @keyframes slideUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:none; } }
+    .modal h3 { font-size: 20px; font-weight: 800; color: var(--brown); margin-bottom: 20px; }
+    .modal-close {
+      position: absolute; top: 18px; right: 20px;
+      background: none; border: none; font-size: 20px; cursor: pointer; color: var(--bark);
+    }
+    .form-row { margin-bottom: 16px; }
+    .form-row label { display: block; font-size: 12.5px; font-weight: 600; color: var(--bark); margin-bottom: 6px; }
+    .form-row input, .form-row select, .form-row textarea {
+      width: 100%; padding: 11px 14px;
+      border: 1.8px solid rgba(255,107,0,0.22);
+      border-radius: 10px; font-family: inherit; font-size: 14px; color: var(--brown);
+      background: var(--cream); outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+      border-color: var(--saffron);
+      box-shadow: 0 0 0 3px rgba(255,107,0,0.1);
+      background: #fff;
+    }
+    .form-row textarea { resize: vertical; min-height: 80px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .modal-footer { display: flex; gap: 10px; justify-content: flex-end; margin-top: 22px; }
+
+    /* ── TOAST ────────────────────────────────────────────────────── */
+    #toast {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      background: var(--brown); color: #fff;
+      padding: 13px 20px; border-radius: 12px;
+      font-size: 14px; font-weight: 600;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+      display: none; align-items: center; gap: 8px;
+      max-width: 340px;
+    }
+    #toast.show { display: flex; animation: toastIn .3s ease; }
+    #toast.success { background: linear-gradient(135deg, var(--green), var(--green-lt)); }
+    #toast.error   { background: linear-gradient(135deg, var(--red), #e05a4a); }
+    @keyframes toastIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform:none; } }
+
+    /* ── FORMS LINK BUTTON ─────────────────────────────────────── */
+    .forms-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--saffron); font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: color .2s;
+    }
+    .forms-link:hover { color: var(--gold); text-decoration: underline; }
+
+    /* ── DONATION SUMMARY ─────────────────────────────────────── */
+    .donation-summary {
+      display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 22px;
+    }
+    .dsummary-card {
+      background: linear-gradient(135deg, var(--saffron), var(--gold));
+      color: #fff; border-radius: 14px; padding: 16px 22px;
+      min-width: 180px;
+    }
+    .dsummary-card .amt { font-size: 28px; font-weight: 800; }
+    .dsummary-card .lbl { font-size: 12px; opacity: .85; font-weight: 500; margin-top: 2px; }
+
+    /* ── QUICK OVERVIEW TABLE ────────────────────────────────── */
+    .mini-overview {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      #sidebar { transform: translateX(-100%); }
+      #sidebar.open { transform: translateX(0); }
+      #main { margin-left: 0; }
+      .mini-overview { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <div class="icon">🪷</div>
+      <div class="texts">
+        <strong>Seva Sangam</strong>
+        <span>Admin Portal</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-nav">
+    <div class="nav-section-label">Main</div>
+    <div class="nav-item active" data-page="overview" onclick="navigate(this)">
+      <span class="nav-icon">🏠</span> Overview
+    </div>
+
+    <div class="nav-section-label">People</div>
+    <div class="nav-item" data-page="volunteers" onclick="navigate(this)">
+      <span class="nav-icon">🙋</span> Volunteers
+    </div>
+    <div class="nav-item" data-page="members" onclick="navigate(this)">
+      <span class="nav-icon">👥</span> Members
+    </div>
+
+    <div class="nav-section-label">Operations</div>
+    <div class="nav-item" data-page="events" onclick="navigate(this)">
+      <span class="nav-icon">📅</span> Events
+    </div>
+    <div class="nav-item" data-page="donations" onclick="navigate(this)">
+      <span class="nav-icon">💰</span> Donations
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <button class="btn-logout" onclick="logout()">
+      <span>🚪</span> Logout
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div id="main">
+  <header id="header">
+    <div class="header-title"><span id="pageLabel">Overview</span> — Seva Sangam</div>
+    <div class="header-right">
+      <span class="datetime" id="clock"></span>
+      <div class="admin-chip">👤 Admin</div>
+    </div>
+  </header>
+
+  <div id="content">
+
+    <!-- ── OVERVIEW PAGE ─────────────────────────────────────────── -->
+    <div class="page active" id="page-overview">
+      <div class="page-title">Welcome Back! 🙏</div>
+      <div class="page-subtitle">Here's a snapshot of your NGO at a glance</div>
+
+      <div class="stats-grid">
+        <div class="stat-card saffron">
+          <div class="stat-icon">🙋</div>
+          <div class="stat-value" id="stat-volunteers">—</div>
+          <div class="stat-label">Volunteers</div>
+        </div>
+        <div class="stat-card gold">
+          <div class="stat-icon">👥</div>
+          <div class="stat-value" id="stat-members">—</div>
+          <div class="stat-label">Members</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-icon">📅</div>
+          <div class="stat-value" id="stat-events">—</div>
+          <div class="stat-label">Events Held</div>
+        </div>
+        <div class="stat-card bark">
+          <div class="stat-icon">💰</div>
+          <div class="stat-value" id="stat-donations">—</div>
+          <div class="stat-label">Total Donated (₹)</div>
+        </div>
+      </div>
+
+      <div class="mini-overview">
+        <!-- Recent Events -->
+        <div class="section-card">
+          <div class="section-head">
+            <h2>📅 Recent Events</h2>
+            <button class="btn btn-ghost btn-sm" onclick="navigate(document.querySelector('[data-page=events]'))">View All</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Event</th><th>Date</th><th>Attended</th></tr></thead>
+              <tbody id="overview-events-body">
+                <tr><td colspan="3"><div class="empty-state"><div class="big">📅</div>No events yet</div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Recent Donations -->
+        <div class="section-card">
+          <div class="section-head">
+            <h2>💰 Recent Donations</h2>
+            <button class="btn btn-ghost btn-sm" onclick="navigate(document.querySelector('[data-page=donations]'))">View All</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Donor</th><th>Amount</th><th>Date</th></tr></thead>
+              <tbody id="overview-donations-body">
+                <tr><td colspan="3"><div class="empty-state"><div class="big">💰</div>No donations yet</div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── VOLUNTEERS PAGE ─────────────────────────────────────────── -->
+    <div class="page" id="page-volunteers">
+      <div class="page-title">Volunteers 🙋</div>
+      <div class="page-subtitle">Manage all active volunteers of the NGO</div>
+
+      <div class="section-card">
+        <div class="section-head">
+          <h2>🙋 All Volunteers <span class="badge" id="vol-count">0</span></h2>
+          <button class="btn btn-primary" onclick="openModal('vol')">+ Add Volunteer</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Role</th><th>Email</th><th>Phone</th><th>Joined</th><th>Action</th></tr>
+            </thead>
+            <tbody id="vol-table-body">
+              <tr><td colspan="6"><div class="empty-state"><div class="big">🙋</div>No volunteers yet. Add one!</div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MEMBERS PAGE ─────────────────────────────────────────────── -->
+    <div class="page" id="page-members">
+      <div class="page-title">Members 👥</div>
+      <div class="page-subtitle">Manage all NGO members</div>
+
+      <div class="section-card">
+        <div class="section-head">
+          <h2>👥 All Members <span class="badge" id="mem-count">0</span></h2>
+          <button class="btn btn-primary" onclick="openModal('mem')">+ Add Member</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Email</th><th>Phone</th><th>Joined</th><th>Action</th></tr>
+            </thead>
+            <tbody id="mem-table-body">
+              <tr><td colspan="6"><div class="empty-state"><div class="big">👥</div>No members yet. Add one!</div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── EVENTS PAGE ─────────────────────────────────────────────── -->
+    <div class="page" id="page-events">
+      <div class="page-title">Events 📅</div>
+      <div class="page-subtitle">Track events, attendance & Google Form responses</div>
+
+      <div class="section-card">
+        <div class="section-head">
+          <h2>📅 All Events <span class="badge" id="evt-count">0</span></h2>
+          <button class="btn btn-primary" onclick="openModal('evt')">+ Add Event</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Event Name</th><th>Date</th><th>Location</th><th>Attended</th><th>Form Responses</th><th>Action</th></tr>
+            </thead>
+            <tbody id="evt-table-body">
+              <tr><td colspan="6"><div class="empty-state"><div class="big">📅</div>No events yet. Add one!</div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DONATIONS PAGE ─────────────────────────────────────────── -->
+    <div class="page" id="page-donations">
+      <div class="page-title">Donations 💰</div>
+      <div class="page-subtitle">Track all donations received by the NGO</div>
+
+      <div class="donation-summary">
+        <div class="dsummary-card">
+          <div class="amt" id="total-donated">₹0</div>
+          <div class="lbl">Total Donations Received</div>
+        </div>
+        <div class="dsummary-card" style="background: linear-gradient(135deg,#2D6A4F,#40916C)">
+          <div class="amt" id="donation-count">0</div>
+          <div class="lbl">Number of Donors</div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-head">
+          <h2>💰 All Donations <span class="badge" id="don-count">0</span></h2>
+          <button class="btn btn-primary" onclick="openModal('don')">+ Record Donation</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Donor Name</th><th>Amount</th><th>Method</th><th>Purpose</th><th>Date</th><th>Action</th></tr>
+            </thead>
+            <tbody id="don-table-body">
+              <tr><td colspan="6"><div class="empty-state"><div class="big">💰</div>No donations yet. Record one!</div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<!-- ═══════════════ MODALS ═══════════════ -->
+
+<!-- Volunteer Modal -->
+<div class="modal-overlay" id="modal-vol">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('vol')">✕</button>
+    <h3>➕ Add Volunteer</h3>
+    <form id="form-vol" onsubmit="submitVolunteer(event)">
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Full Name *</label>
+          <input type="text" name="name" required placeholder="Ramesh Kumar" />
+        </div>
+        <div class="form-row">
+          <label>Role</label>
+          <input type="text" name="role" placeholder="Field Coordinator" />
+        </div>
+        <div class="form-row">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="ramesh@email.com" />
+        </div>
+        <div class="form-row">
+          <label>Phone</label>
+          <input type="tel" name="phone" placeholder="+91 98765 43210" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('vol')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Volunteer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Member Modal -->
+<div class="modal-overlay" id="modal-mem">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('mem')">✕</button>
+    <h3>➕ Add Member</h3>
+    <form id="form-mem" onsubmit="submitMember(event)">
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Full Name *</label>
+          <input type="text" name="name" required placeholder="Priya Sharma" />
+        </div>
+        <div class="form-row">
+          <label>Membership Type</label>
+          <select name="membershipType">
+            <option>General</option>
+            <option>Premium</option>
+            <option>Lifetime</option>
+            <option>Honorary</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="priya@email.com" />
+        </div>
+        <div class="form-row">
+          <label>Phone</label>
+          <input type="tel" name="phone" placeholder="+91 98765 43210" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('mem')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Member</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Event Modal -->
+<div class="modal-overlay" id="modal-evt">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('evt')">✕</button>
+    <h3 id="evt-modal-title">➕ Add Event</h3>
+    <form id="form-evt" onsubmit="submitEvent(event)">
+      <input type="hidden" name="_id" />
+      <div class="form-row">
+        <label>Event Name *</label>
+        <input type="text" name="name" required placeholder="Annual Health Camp" />
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Date *</label>
+          <input type="date" name="date" required />
+        </div>
+        <div class="form-row">
+          <label>Attendees Count</label>
+          <input type="number" name="attendees" min="0" placeholder="0" />
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Location</label>
+        <input type="text" name="location" placeholder="Village Community Hall, Rajasthan" />
+      </div>
+      <div class="form-row">
+        <label>Description</label>
+        <textarea name="description" placeholder="Brief description of the event…"></textarea>
+      </div>
+      <div class="form-row">
+        <label>🔗 Google Form Link (for registration / survey)</label>
+        <input type="url" name="googleFormLink" placeholder="https://forms.gle/…" />
+      </div>
+      <div class="form-row">
+        <label>📊 Google Form Responses Link (view responses)</label>
+        <input type="url" name="formResponsesLink" placeholder="https://docs.google.com/spreadsheets/…" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('evt')">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="evt-submit-btn">Save Event</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Donation Modal -->
+<div class="modal-overlay" id="modal-don">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('don')">✕</button>
+    <h3>➕ Record Donation</h3>
+    <form id="form-don" onsubmit="submitDonation(event)">
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Donor Name *</label>
+          <input type="text" name="donorName" required placeholder="Anita Gupta" />
+        </div>
+        <div class="form-row">
+          <label>Amount (₹) *</label>
+          <input type="number" name="amount" required min="1" placeholder="500" />
+        </div>
+        <div class="form-row">
+          <label>Payment Method</label>
+          <select name="paymentMethod">
+            <option>Cash</option>
+            <option>UPI</option>
+            <option>Bank Transfer</option>
+            <option>Cheque</option>
+            <option>Online</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Date</label>
+          <input type="date" name="date" />
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Purpose / Note</label>
+        <input type="text" name="purpose" placeholder="Education Fund, Food Drive…" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('don')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Record Donation</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast">✅ Done!</div>
+
+<script>
+// ── Auth guard ──────────────────────────────────────────────────────────────
+(async () => {
+  try {
+    const r = await fetch('/api/auth/me', { credentials: 'include' });
+    const d = await r.json();
+    if (!d.success) location.href = '/';
+  } catch { location.href = '/'; }
+})();
+
+// ── Clock ───────────────────────────────────────────────────────────────────
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent =
+    now.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }) +
+    ' · ' + now.toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit' });
+}
+updateClock(); setInterval(updateClock, 1000);
+
+// ── Navigation ───────────────────────────────────────────────────────────────
+const labels = { overview:'Overview', volunteers:'Volunteers', members:'Members', events:'Events', donations:'Donations' };
+function navigate(el) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  const page = el.dataset.page;
+  document.getElementById('page-' + page).classList.add('active');
+  document.getElementById('pageLabel').textContent = labels[page] || page;
+  if (page === 'overview')   loadOverview();
+  if (page === 'volunteers') loadVolunteers();
+  if (page === 'members')    loadMembers();
+  if (page === 'events')     loadEvents();
+  if (page === 'donations')  loadDonations();
+}
+
+// ── Toast ────────────────────────────────────────────────────────────────────
+function toast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = (type === 'success' ? '✅ ' : '❌ ') + msg;
+  t.className = 'show ' + type;
+  setTimeout(() => t.className = '', 3000);
+}
+
+// ── Modal helpers ────────────────────────────────────────────────────────────
+function openModal(key) {
+  document.getElementById('modal-' + key).classList.add('open');
+}
+function closeModal(key) {
+  document.getElementById('modal-' + key).classList.remove('open');
+  document.getElementById('form-' + key).reset();
+  if (key === 'evt') {
+    document.getElementById('evt-modal-title').textContent = '➕ Add Event';
+    document.getElementById('evt-submit-btn').textContent = 'Save Event';
+    document.querySelector('#form-evt [name="_id"]').value = '';
+  }
+}
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
+});
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function fmtDate(d) { return d ? new Date(d).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }) : '—'; }
+function fmtMoney(n) { return '₹' + Number(n).toLocaleString('en-IN'); }
+
+// ── OVERVIEW ─────────────────────────────────────────────────────────────────
+async function loadOverview() {
+  try {
+    const [sR, eR, dR] = await Promise.all([
+      fetch('/api/stats', { credentials:'include' }).then(r=>r.json()),
+      fetch('/api/events', { credentials:'include' }).then(r=>r.json()),
+      fetch('/api/donations', { credentials:'include' }).then(r=>r.json())
+    ]);
+    if (sR.success) {
+      document.getElementById('stat-volunteers').textContent = sR.stats.volunteers;
+      document.getElementById('stat-members').textContent    = sR.stats.members;
+      document.getElementById('stat-events').textContent     = sR.stats.events;
+      document.getElementById('stat-donations').textContent  = sR.stats.totalDonations.toLocaleString('en-IN');
+    }
+    if (eR.success) {
+      const body = document.getElementById('overview-events-body');
+      const recent = eR.data.slice(0,5);
+      if (!recent.length) { body.innerHTML = '<tr><td colspan="3"><div class="empty-state"><div class="big">📅</div>No events yet</div></td></tr>'; return; }
+      body.innerHTML = recent.map(e => `
+        <tr>
+          <td><strong>${e.name}</strong></td>
+          <td>${fmtDate(e.date)}</td>
+          <td><span class="pill pill-orange">${e.attendees}</span></td>
+        </tr>`).join('');
+    }
+    if (dR.success) {
+      const body = document.getElementById('overview-donations-body');
+      const recent = dR.data.slice(0,5);
+      if (!recent.length) { body.innerHTML = '<tr><td colspan="3"><div class="empty-state"><div class="big">💰</div>No donations yet</div></td></tr>'; return; }
+      body.innerHTML = recent.map(d => `
+        <tr>
+          <td><strong>${d.donorName}</strong></td>
+          <td><span class="pill pill-green">${fmtMoney(d.amount)}</span></td>
+          <td>${fmtDate(d.date)}</td>
+        </tr>`).join('');
+    }
+  } catch(e) { console.error(e); }
+}
+loadOverview();
+
+// ── VOLUNTEERS ───────────────────────────────────────────────────────────────
+async function loadVolunteers() {
+  const r = await fetch('/api/volunteers', { credentials:'include' });
+  const d = await r.json();
+  const body = document.getElementById('vol-table-body');
+  document.getElementById('vol-count').textContent = d.data.length;
+  if (!d.data.length) { body.innerHTML = '<tr><td colspan="6"><div class="empty-state"><div class="big">🙋</div>No volunteers yet. Add one!</div></td></tr>'; return; }
+  body.innerHTML = d.data.map(v => `
+    <tr>
+      <td><strong>${v.name}</strong></td>
+      <td><span class="pill pill-orange">${v.role||'Volunteer'}</span></td>
+      <td>${v.email||'—'}</td>
+      <td>${v.phone||'—'}</td>
+      <td>${fmtDate(v.joinedDate)}</td>
+      <td><button class="btn btn-danger btn-sm" onclick="deleteItem('volunteers','${v._id}',loadVolunteers)">🗑 Remove</button></td>
+    </tr>`).join('');
+}
+
+async function submitVolunteer(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const body = Object.fromEntries(fd.entries());
+  const r = await fetch('/api/volunteers', { method:'POST', credentials:'include', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  const d = await r.json();
+  if (d.success) { closeModal('vol'); loadVolunteers(); toast('Volunteer added!'); }
+  else toast(d.message, 'error');
+}
+
+// ── MEMBERS ──────────────────────────────────────────────────────────────────
+async function loadMembers() {
+  const r = await fetch('/api/members', { credentials:'include' });
+  const d = await r.json();
+  const body = document.getElementById('mem-table-body');
+  document.getElementById('mem-count').textContent = d.data.length;
+  if (!d.data.length) { body.innerHTML = '<tr><td colspan="6"><div class="empty-state"><div class="big">👥</div>No members yet. Add one!</div></td></tr>'; return; }
+  body.innerHTML = d.data.map(m => `
+    <tr>
+      <td><strong>${m.name}</strong></td>
+      <td><span class="pill pill-gold">${m.membershipType||'General'}</span></td>
+      <td>${m.email||'—'}</td>
+      <td>${m.phone||'—'}</td>
+      <td>${fmtDate(m.joinedDate)}</td>
+      <td><button class="btn btn-danger btn-sm" onclick="deleteItem('members','${m._id}',loadMembers)">🗑 Remove</button></td>
+    </tr>`).join('');
+}
+
+async function submitMember(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const body = Object.fromEntries(fd.entries());
+  const r = await fetch('/api/members', { method:'POST', credentials:'include', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  const d = await r.json();
+  if (d.success) { closeModal('mem'); loadMembers(); toast('Member added!'); }
+  else toast(d.message, 'error');
+}
+
+// ── EVENTS ───────────────────────────────────────────────────────────────────
+async function loadEvents() {
+  const r = await fetch('/api/events', { credentials:'include' });
+  const d = await r.json();
+  const body = document.getElementById('evt-table-body');
+  document.getElementById('evt-count').textContent = d.data.length;
+  if (!d.data.length) { body.innerHTML = '<tr><td colspan="6"><div class="empty-state"><div class="big">📅</div>No events yet. Add one!</div></td></tr>'; return; }
+  body.innerHTML = d.data.map(ev => `
+    <tr>
+      <td><strong>${ev.name}</strong>${ev.description ? `<br><small style="color:var(--bark)">${ev.description.slice(0,60)}…</small>` : ''}</td>
+      <td>${fmtDate(ev.date)}</td>
+      <td>${ev.location||'—'}</td>
+      <td><span class="pill pill-orange">${ev.attendees} people</span></td>
+      <td>
+        ${ev.formResponsesLink
+          ? `<a class="forms-link" href="${ev.formResponsesLink}" target="_blank" rel="noopener">📊 View Responses ↗</a>`
+          : ev.googleFormLink
+            ? `<a class="forms-link" href="${ev.googleFormLink}" target="_blank" rel="noopener">📋 Open Form ↗</a>`
+            : '<span style="color:#ccc">—</span>'}
+      </td>
+      <td style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="btn btn-ghost btn-sm" onclick="editEvent(${JSON.stringify(ev).replace(/"/g,'&quot;')})">✏️ Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteItem('events','${ev._id}',loadEvents)">🗑</button>
+      </td>
+    </tr>`).join('');
+}
+
+async function submitEvent(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const body = Object.fromEntries(fd.entries());
+  const id = body._id; delete body._id;
+  const url = id ? `/api/events/${id}` : '/api/events';
+  const method = id ? 'PUT' : 'POST';
+  const r = await fetch(url, { method, credentials:'include', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  const d = await r.json();
+  if (d.success) { closeModal('evt'); loadEvents(); toast(id ? 'Event updated!' : 'Event added!'); }
+  else toast(d.message, 'error');
+}
+
+function editEvent(ev) {
+  const form = document.getElementById('form-evt');
+  form.querySelector('[name="_id"]').value         = ev._id;
+  form.querySelector('[name="name"]').value        = ev.name;
+  form.querySelector('[name="date"]').value        = ev.date ? ev.date.slice(0,10) : '';
+  form.querySelector('[name="attendees"]').value   = ev.attendees;
+  form.querySelector('[name="location"]').value    = ev.location || '';
+  form.querySelector('[name="description"]').value = ev.description || '';
+  form.querySelector('[name="googleFormLink"]').value    = ev.googleFormLink || '';
+  form.querySelector('[name="formResponsesLink"]').value = ev.formResponsesLink || '';
+  document.getElementById('evt-modal-title').textContent = '✏️ Edit Event';
+  document.getElementById('evt-submit-btn').textContent  = 'Update Event';
+  openModal('evt');
+}
+
+// ── DONATIONS ─────────────────────────────────────────────────────────────────
+async function loadDonations() {
+  const r = await fetch('/api/donations', { credentials:'include' });
+  const d = await r.json();
+  const body = document.getElementById('don-table-body');
+  document.getElementById('don-count').textContent = d.data.length;
+  document.getElementById('donation-count').textContent = d.data.length;
+  const total = d.data.reduce((s, x) => s + x.amount, 0);
+  document.getElementById('total-donated').textContent = fmtMoney(total);
+  if (!d.data.length) { body.innerHTML = '<tr><td colspan="6"><div class="empty-state"><div class="big">💰</div>No donations yet. Record one!</div></td></tr>'; return; }
+  body.innerHTML = d.data.map(don => `
+    <tr>
+      <td><strong>${don.donorName}</strong></td>
+      <td><span class="pill pill-green">${fmtMoney(don.amount)}</span></td>
+      <td><span class="pill pill-gold">${don.paymentMethod||'Cash'}</span></td>
+      <td>${don.purpose||'—'}</td>
+      <td>${fmtDate(don.date)}</td>
+      <td><button class="btn btn-danger btn-sm" onclick="deleteItem('donations','${don._id}',loadDonations)">🗑 Remove</button></td>
+    </tr>`).join('');
+}
+
+async function submitDonation(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const body = Object.fromEntries(fd.entries());
+  const r = await fetch('/api/donations', { method:'POST', credentials:'include', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  const d = await r.json();
+  if (d.success) { closeModal('don'); loadDonations(); toast('Donation recorded!'); }
+  else toast(d.message, 'error');
+}
+
+// ── DELETE ────────────────────────────────────────────────────────────────────
+async function deleteItem(resource, id, reload) {
+  if (!confirm('Are you sure you want to remove this record?')) return;
+  const r = await fetch(`/api/${resource}/${id}`, { method:'DELETE', credentials:'include' });
+  const d = await r.json();
+  if (d.success) { reload(); toast('Record removed!'); }
+  else toast('Failed to delete', 'error');
+}
+
+// ── LOGOUT ────────────────────────────────────────────────────────────────────
+async function logout() {
+  await fetch('/api/auth/logout', { method:'POST', credentials:'include' });
+  location.href = '/';
+}
+</script>
+</body>
+</html>
