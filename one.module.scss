@@ -1,0 +1,41 @@
+.wrapper {
+  padding: 18px 26px;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    align-items: center;
+
+    h4 {
+      font-family: Axiforma Bold;
+      font-size: 22px;
+      line-height: 36px;
+    }
+  }
+  p {
+    font-family: Axiforma Regular;
+    font-size: 18px;
+    line-height: 30px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    transform-origin: top;
+    color: #383336;
+  }
+  p.open {
+    max-height: 1000px;
+    transition: max-height 0.3s ease-in-out;
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}

@@ -1,0 +1,119 @@
+.outer-wrapper {
+  width: 100%;
+  background: #fff;
+  margin-bottom: 50px;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .inner-wrapper {
+   max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100px 20px;
+  gap: 80px;
+  flex-wrap: wrap;
+
+    .content {
+      display: flex;
+      gap: 20px;
+      flex-direction: column;
+      justify-content: center;
+
+      h3 {
+        color: #383336;
+        font-family: Axiforma Black;
+        font-size: 30px;
+        line-height: 54px;
+      }
+      p {
+        font-family: Axiforma Regular;
+        font-size: 21px;
+        line-height: 35px;
+        color: #383336;
+      }
+    }
+  }
+}
+.section{
+  padding:80px 20px;
+}
+
+.container{
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:50px;
+}
+
+.image{
+  flex:1;
+
+  img{
+    width:100%;
+    max-width:450px;
+    height:auto;
+  }
+}
+
+.content{
+  flex:1;
+
+  h3{
+    font-size:32px;
+    margin-bottom:20px;
+  }
+
+  p{
+    font-size:18px;
+    line-height:30px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .inner-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+    padding: 40px 20px;
+  }
+
+  /* IMAGE FIRST */
+
+  .image {
+    order: 1;
+  }
+
+  .content {
+    order: 2;
+  }
+
+  .image img {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+  }
+
+  .content h3 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .content p {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+}
