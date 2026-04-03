@@ -24,7 +24,7 @@ export const content = {
         },
         p: {
           dangerouslySetInnerHTML:
-            'Agresar is an attempt to bring structure <br/> to random act of kindness.',
+            'At Agresar, we believe every small act of kindness matters. We bring people together, turning individual effort into real, meaningful change for those who need it most.',
         },
         button: {
           type: 'primary',
@@ -51,11 +51,7 @@ export const content = {
       right: {
         h2: 'About Us',
         h3: 'Founded in May 2017',
-        p: `Agresar Foundation brings to the fore, pertinent issues that plague
-        the society and collaborates with enablers to bring about a change.
-        The foundation is run by self-driven, socially accountable and
-        morally balanced youth who wish to give their bit and more to the
-        society.`,
+        p: `Agresar Foundation started with a simple belief — small efforts, when united, can change the world around us. We work on education, poverty, and the environment, bringing the right people together to drive real change. Our team of young, self-driven individuals don't just show up — they give everything they have.`,
       },
        
      hyperlink: {
@@ -122,7 +118,7 @@ export const content = {
         width: 304,
       },
       h2: 'WHAT IS बे एके बे ?',
-      p: 'At Agresar Foundation, we celebrate the National Mathematics day on a Birth Anniversary of the great Indian mathematician Dr. Srinivasa Ramanujan. He was elected as a fellow at Trinity College, Cambridge and made a great contribution in the field of mathematics.',
+      p: 'At Agresar Foundation, learning is not limited to classrooms. Our initiative "Be Eke Be" celebrates National Mathematics Day observed on the birth anniversary of the legendary Dr. Srinivasa Ramanujan, bringing the joy of numbers to life through competitions, wall paintings, and interactive sessions. With one simple goal: to remove fear and build curiosity among students.',
       button: {
         type: 'secondary',
         text: 'Know More',
@@ -135,35 +131,35 @@ export const content = {
           {
             title: 'Education & Scholarship',
             content:
-              'Agresar Foundation has supported underpriviledged students by providing scholarships and financial aid for their education. The foundation focuses on ensuring access to quality education, particularly for economically disadvantaged students.',
+              'We support students from economically weaker sections through financial assistance, scholarships, and access to quality education. From study forums to night schools, we ensure no child is ever deprived of the opportunity to learn.',
             openIcon: '/AccordianOpen.svg',
             closeIcon: '/AccordianClose.svg',
           },
           {
             title: 'Environment',
             content:
-              'Agresar Foundation actively engages in environmental conservation efforts, including afforestation programs, waste management initiatives, and awareness campaigns to promote sustainability.',
+              'Through plantation drives, waste management, and awareness campaigns, we work towards building a cleaner, more sustainable future. Because small steps taken today are the foundation of a healthier tomorrow.',
             openIcon: '/AccordianOpen.svg',
             closeIcon: '/AccordianClose.svg',
           },
           {
             title: 'Ambulance Services',
             content:
-              'Agresar Foundation operates ambulance services to provide timely medical assistance to those in need. This initiative ensures access to emergency healthcare, especially in remote areas.',
+              'We provide timely ambulance services to ensure no medical emergency goes unattended — reaching those who need urgent care the most, especially in areas where help is not always available.',
             openIcon: '/AccordianOpen.svg',
             closeIcon: '/AccordianClose.svg',
           },
           {
             title: 'Covid-2019 Relief Work',
             content:
-              'During the Covid-19 pandemic, Agresar Foundation played a crucial role in relief efforts by distributing food supplies, medical kits, and protective gear to affected communities.',
+              'When COVID-19 brought the world to a halt, Agresar stood where it was needed most — distributing food supplies, medical kits, and protective gear to communities that had nowhere else to turn.',
             openIcon: '/AccordianOpen.svg',
             closeIcon: '/AccordianClose.svg',
           },
           {
             title: 'Cash Donation',
             content:
-              'Agresar Foundation facilitates direct financial assistance to individuals and families in distress, supporting healthcare, education, and other essential needs through cash donations.',
+              'We believe every contribution, big or small, has the power to change a life. Through donation drives and campaigns, we channel collective generosity towards healthcare, education, and essential needs for families in distress.',
             openIcon: '/AccordianOpen.svg',
             closeIcon: '/AccordianClose.svg',
           },
@@ -236,8 +232,8 @@ export const content = {
       ],
     },
     nine: {
-      h2: 'Share your love, and give hope to those in need',
-      p: 'your contribution and generous support is very much appreciated.',
+      h2: 'Share your kindness. Spread hope.',
+      p: 'Every small act of giving creates a world of change for someone who needs it most.',
       button: {
         type: 'secondary',
         text: 'Donate',
@@ -283,7 +279,7 @@ export const content = {
         },
         p: {
           dangerouslySetInnerHTML:
-            'Agresar Foundation brings to the fore, pertinent issues that plague the society and collaborates with enablers to bring about a change. The foundation is run by self-driven, socially accountable and morally balanced youth who wish to give their bit and more to the society.',
+            'Agresar Foundation is built on the belief that meaningful change begins when people choose to take responsibility for the world around them. What started as a small group of friends pooling their own resources has grown into a dedicated movement — addressing real challenges in education, poverty, and the environment with consistency and heart. We do not wait for the right moment or the right resources. We work with what we have, where we are, for those who need it most.',
         },
       },
       right: {
@@ -298,11 +294,11 @@ export const content = {
     two: {
       section1: {
         h2: 'What we do ?',
-        p: 'Agresar has been working rigorously for the upliftment of underprivileged people society since the beginning. We have organised many events like cloth donation camps, study forums, cultural events and we are willing to do more.',
+        p: 'Over the years, Agresar Foundation has worked consistently towards building a society where no one is left behind. From clothing donation drives and night schools to cultural programs and health initiatives, every effort has been aimed at creating real, lasting impact. Our goal is not just to help — but to empower individuals to build a better future for themselves.',
       },
       section2: {
         h2: 'Our Values',
-        p: 'Agresar Foundation brings to the fore, pertinent issues that plague the society and collaborates with enablers to bring about a change. The foundation is run by self-driven, socially accountable and morally balanced youth who wish to give their bit and more to the society. Agresar Foundation brings to the fore, pertinent issues that plague the society and collaborates with enablers to bring about a change. The foundation is run by self-driven, socially accountable and morally balanced youth who wish to give their bit and more to the society.',
+        p: 'At Agresar, our work is guided by strong values that define who we are and how we serve. We believe in Transparency — being open, honest, and accountable in everything we do. Every action is driven by a Helping Hand — a genuine intent to support and uplift others. Honesty sits at the core of all our efforts, without exception. And through Curiosity & Growth, we constantly learn, adapt, and grow to serve better every day. These values are not just words, they are reflected in every initiative we undertake.',
         img: {
           src: '/assets/about/two/banner.png',
           alt: 'aboutTwoBanner',
@@ -355,32 +351,32 @@ export const content = {
         {
           year: '2017',
           content:
-            'Agresar Foundation brings to the fore, pertinent issues that plague the society and collaborates with enablers to bring about a change. The foundation is run by self-driven, socially accountable and morally balanced youth who wish to give their bit and more to the society.',
+            'It all began in 2017, when a group of young individuals decided that waiting for change was not an option. Agresar Foundation was established with a simple yet powerful vision — that meaningful social impact does not always require grand gestures. Sometimes, all it takes is small, consistent efforts and the will to show up.',
         },
         {
           year: '2018',
           content:
-            'By 2018, Agresar expanded its footprint in rural areas, emphasizing financial literacy, entrepreneurship, and social empowerment under the “Be Eke Be” initiative. The foundation conducted intensive training programs for women-led SHGs, enabling them to manage finances, access microloans, and establish income-generating activities. Health and hygiene interventions were also introduced, with awareness programs on menstrual health and sanitation. In addition, Agresar collaborated with local stakeholders to set up village enterprises, ensuring that community members had access to sustainable livelihood opportunities. This year reinforced Agresar’s vision of self-reliant rural communities driven by grassroots leadership.',
+            'By 2018, Agresar had expanded its footprint into rural areas, with a sharper focus on financial literacy, entrepreneurship, and social empowerment. Under the "Be Eke Be" initiative, the foundation ran dedicated training programs for women-led self-help groups — equipping them to manage their finances, access microloans, and build their own income through sustainable work. Health and hygiene interventions were introduced this year as well, with awareness programs on menstrual health and sanitation reaching communities that had rarely had access to such conversations before. Agresar also collaborated with local stakeholders to set up village enterprises, ensuring community members had real pathways to sustainable livelihoods. 2018 was the year that truly shaped Agresar and its identity a foundation committed to building self-reliant rural communities driven by grassroots leadership.',
         },
         {
           year: '2019',
           content:
-            'Agresar intensified its women’s empowerment initiatives in 2019 by expanding the “Be Eke Be” program, which had begun demonstrating tangible impact. Women participants url their own small businesses, including poultry farming, tailoring, and local handicraft production, backed by Agresar’s mentorship and financial support. The foundation also launched a farmer-led initiative to promote organic farming techniques and water conservation methods, improving agricultural resilience. Moreover, skill development programs were extended to rural youth, equipping them with vocational skills that increased employability. Agresar’s holistic approach strengthened community structures, allowing rural individuals to achieve economic independence.',
+            'Agresar intensified its women’s empowerment initiatives in 2019 by expanding the “Be Eke Be” program, which had begun demonstrating tangible impact. Women participants who were running their own small businesses, including poultry farming, tailoring, and local handicraft production, backed by Agresar’s mentorship and financial support. The foundation also launched a farmer-led initiative to promote organic farming techniques and water conservation methods, improving agricultural resilience. Moreover, skill development programs were extended to rural youth, equipping them with vocational skills that increased employability. Agresar’s holistic approach strengthened community structures, allowing rural individuals to achieve economic independence.',
         },
         {
           year: '2020',
           content:
-            'The COVID-19 pandemic presented unprecedented challenges in 2020, disrupting livelihoods and essential services. In response, Agresar quickly mobilized relief efforts, distributing food supplies, hygiene kits, and medical aid to affected families. The “Be Eke Be” initiative played a crucial role in crisis response, as women-led SHGs stepped up to produce masks and sanitizers, generating income while contributing to public health efforts. Agresar also facilitated digital learning programs to prevent education loss among rural children. Despite the setbacks caused by the pandemic, the foundation’s adaptive strategies ensured that communities remained resilient and continued progressing toward self-sufficiency.',
+            '2020 was a year no one saw coming. When COVID-19 disrupted livelihoods and essential services, Agresar did not wait — quickly mobilizing relief efforts and distributing food supplies, hygiene kits, and medical aid to affected families. The "Be Eke Be" initiative rose to the moment as women-led self-help groups stepped up to produce masks and sanitizers, generating income while contributing to public health efforts. Digital learning programs were launched to ensure rural children did not fall behind on their education. Even in the hardest year, Agresar communities showed what they were made of — resilient, resourceful, and refusing to give up.',
         },
         {
           year: '2021',
           content:
-            'As recovery efforts gained momentum in 2021, Agresar strengthened its core programs, with a renewed emphasis on digital literacy and entrepreneurship. The “Be Eke Be” movement evolved to incorporate digital financial literacy, helping rural women access and manage bank accounts, digital payments, and credit facilities. Rural youth were trained in computer skills, enhancing their employability in an increasingly digital economy. Agresar also reinforced its focus on sustainable agriculture by introducing new climate-resilient farming techniques. Healthcare access was expanded through mobile medical camps, ensuring that underserved communities received essential medical care.',
+            'By 2021, as the world began to recover, Agresar shifted focus toward rebuilding stronger and smarter. The "Be Eke Be" movement evolved to include digital financial literacy — helping rural women access and manage bank accounts, digital payments, and credit facilities with confidence. Rural youth were trained in computer skills, opening new doors in an increasingly digital economy. Agresar also deepened its commitment to sustainable agriculture by introducing climate-resilient farming techniques that gave farmers better tools to face an uncertain future. Mobile medical camps were launched this year as well, bringing essential healthcare directly to underserved communities that had long been overlooked. 2021 was not just about recovery — it was about building back better.',
         },
         {
           year: '2022',
           content:
-            'In 2022, Agresar deepened its commitment to environmental sustainability and rural entrepreneurship. The “Be Eke Be” initiative facilitated the establishment of more women-led enterprises, ranging from dairy farming to small-scale retail businesses. Agresar also introduced climate-smart agricultural practices, equipping farmers with knowledge on organic pest control, soil conservation, and water management. Waste management and afforestation projects were launched in several villages to promote ecological balance. The foundation further expanded its outreach by conducting policy advocacy, engaging with local governments to drive systemic changes in rural development.',
+            '2022 saw Agresar go deeper — into communities, into sustainability, and into creating change that would last. The "Be Eke Be" initiative helped establish more women-led enterprises this year, ranging from dairy farming to small-scale retail businesses, giving more families a stable source of income. Climate-smart agricultural practices were introduced as well, equipping farmers with practical knowledge on organic pest control, soil conservation, and water management. Waste management drives and afforestation projects were launched across several villages, working towards restoring ecological balance one community at a time. Perhaps most significantly, 2022 marked Agresar first steps into policy advocacy — engaging directly with local governments to push for systemic changes in rural development. The work was no longer just on the ground. It was reaching the rooms where decisions are made.',
         },
         {
           year: '2023',
@@ -428,7 +424,7 @@ export const content = {
         },
         p: {
           dangerouslySetInnerHTML:
-            'Agresar is an attempt to bring structure to random act of kindness.',
+            'At Agresar Foundation, every event is an opportunity to create awareness, inspire change, and bring people together for something that truly matters. Because when people unite with a shared purpose, real impact does not just happen, it stays.',
         },
       },
       right: {
@@ -440,7 +436,7 @@ export const content = {
         },
       },
     },
-     three: { left: { h3: 'Education & Scholarship', p: 'Agresar Foundation brings to the fore, pertinent issues that plague the society and collaborates with enablers to bring about a change. The foundation is run by self-driven, socially accountable and morally balanced youth who wish to give their bit and more to the society.', }, 
+     three: { left: { h3: 'Education & Scholarship', p: 'Education has always been at the heart of Agresar Foundation. We believe that access to quality education can transform not just individual lives, but entire communities. Through scholarships, study resources, and learning platforms, we support students from economically weaker sections — because financial limitations should never stand between a child and their future.', }, 
      right: { 
       img: { src: '/assets/events/six/item-5.jpg',
          alt: 'eventsTwoRight', 
@@ -450,7 +446,7 @@ width: 450,
      }, 
     },
   },
-  six: { left: { h3: 'WHAT IS बे एके बे ?', p: ' t Agresar Foundation, we celebrate the National Mathematics day on a Birth Anniversary of the great Indian mathematician Dr. Srinivasa Ramanujan. He was elected as a fellow at Trinity College, Cambridge and made a great contribution in the field of mathematics. Some of his well known contributions are Complex Analysis, Number Theory, Infinite Series Continued Fraction, etc.Agresar Foundation organizes an event named बे एके बे every year. Under an umbrella of the बे एके बे event we carry out various competitions, expert guest guidance lectures, etc. to increase the curiosity of students as well as spread mathematical awareness among the general public', }
+  six: { left: { h3: 'WHAT IS बे एके बे ?', p: ' "Be Eke Be" is one of our most unique and impactful initiatives, organized every year on National Mathematics Day to honor the legacy of the great Indian mathematician Dr. Srinivasa Ramanujan. Designed to make mathematics engaging, enjoyable, and accessible, this initiative moves away from traditional learning and focuses on activity-based approaches that spark curiosity and remove the fear of numbers. Through mathematics competitions, quizzes, expert guidance sessions, wall painting, and creative design contests, we create an experience where students do not just learn mathematics — they fall in love with it.', }
   , right: { img: { src: '/assets/events/four/beekbe.png', alt: 'eventsTwoRight',  
    height: 450,
 width: 450,
@@ -662,7 +658,7 @@ width: 450,
     },
     two: {
       h2: 'WHAT IS बे एके बे ?',
-      p: 'At Agresar Foundation, we celebrate the National Mathematics day on a Birth Anniversary of the great Indian mathematician Dr. Srinivasa Ramanujan. He was elected as a fellow at Trinity College, Cambridge and made a great contribution in the field of mathematics. Some of his well known contributions are Complex Analysis, Number Theory, Infinite Series Continued Fraction, etc. <br/> Agresar Foundation organizes an event named बे एके बे every year. Under an umbrella of the बे एके बे event we carry out various competitions, expert guest guidance lectures, etc. to increase the curiosity of students as well as spread mathematical awareness among the general public.',
+      p: '"Be Eke Be" was born from one simple observation — mathematics is a subject most students fear, not because it is hard, but because it was never made interesting. Agresar Foundation decided to change that by creating an entire campaign around making numbers feel exciting, accessible, and worth celebrating. The campaign launched with branded "Be Eke Be" T-shirts sold across Nagpur. The response was overwhelming — people from all parts of the city bought and wore them with pride. It was Agresar first step in turning mathematics awareness into a street level movement. 38 schools from across Nagpur participated in this one of a kind competition. Students competed in table recitation with enormous energy, taking home custom designed "Be Eke Be" trophies. The event was held at South Central Zone Cultural Centre, Nagpur.',
       
     },
     three: {
@@ -706,7 +702,7 @@ width: 450,
         },
       ],
 
-      p: 'At Agresar Foundation, we celebrate the National Mathematics day on a Birth Anniversary of the great Indian mathematician Dr. Srinivasa Ramanujan. He was elected as a fellow at Trinity College, Cambridge and made a great contribution in the field of mathematics. Some of his well known contributions are Complex Analysis, Number Theory, Infinite Series Continued Fraction, etc. <br/> Agresar Foundation organizes an event named बे एके बे every year. Under an umbrella of the बे एके बे event we carry out various competitions, expert guest guidance lectures, etc. to increase the curiosity of students as well as spread mathematical awareness among the general public.',
+      p: 'Youth volunteers conduct free evening tuitions covering Maths, Science and Social Science along with hands on computer training. Students also receive notebooks, course books and study material — all provided at no cost.',
       img: {
         src: '/assets/be-ek-be/three/banner.png',
         alt: 'beEkBeThree',
