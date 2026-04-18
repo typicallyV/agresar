@@ -1,31 +1,33 @@
-/*import React from "react";
-
-const VideoPlayer = () => {
-    return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-        <video width="80%" controls poster="/assets/Nitin Gadkari/thumbnail.png">
-          <source src="/assets/Nitin Gadkari/विकासाचे महामेरू केंद्रीय मंत्री मा. श्री. नितीनजी गडकरी यांनी अग्रेसर फाउंडेशनच्या 'बे एके बे' या कार्यक्रमाला शुभेच्छा दिल्या. अग्रेसर फाउंडेशनच्या स्वयंसेवकांच्या कामाची दखल घेत त्यांचे कौतुक केले आणि आगामी प्रकल.mp4" type="video/mp4" 
-          />
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    );
-  };
-  */
- 
 import React from "react";
 import styles from "./eight.module.scss";
 
 const VideoPlayer = () => {
   return (
-    <div className={styles["video-wrapper"]}>
+    // FIX: outer div centers the video and constrains its max width
+    <div className={styles["video-section"]}>
       <video
         className={styles["video"]}
         controls
         poster="/assets/Nitin Gadkari/thumbnail.png"
       >
+        {/*
+          PASTE YOUR VIDEO FILE PATH HERE inside the src attribute below.
+          Your file is currently at:
+            /public/assets/Nitin Gadkari/<long-filename>.mp4
+          
+          In Next.js, anything inside /public is served from the root URL.
+          So your src should be:
+            /assets/Nitin Gadkari/<filename>.mp4
+          
+          IMPORTANT: Rename the video file to something simple with no spaces
+          or special characters, e.g. "gadkari-speech.mp4", then update the src.
+          Special characters and spaces in filenames cause 404 errors in browsers.
+          
+          Example after renaming:
+            src="/assets/Nitin Gadkari/gadkari-speech.mp4"
+        */}
         <source
-          src="/assets/Nitin Gadkari/विकासाचे महामेरू केंद्रीय मंत्री मा. श्री. नितीनजी गडकरी यांनी अग्रेसर फाउंडेशनच्या 'बे एके बे' या कार्यक्रमाला शुभेच्छा दिल्या. अग्रेसर फाउंडेशनच्या स्वयंसेवकांच्या कामाची दखल घेत त्यांचे कौतुक केले आणि आगामी प्रकल.mp4"
+          src="/assets/Nitin Gadkari/12 Nitinji Gadkari 2.mp4"
           type="video/mp4"
         />
         Your browser does not support the video tag.

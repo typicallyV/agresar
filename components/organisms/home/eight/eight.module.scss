@@ -5,33 +5,32 @@
   .inner-wrapper {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 80px 0;
+    padding: 80px 20px; // FIX: was padding: 80px 0 — no side padding caused cards to bleed to screen edge on mobile
 
     h2 {
       font-family: Axiforma Black;
       color: #383336;
       font-size: 49px;
       line-height: 54px;
-      margin-bottom: 70px;
       text-align: center;
       margin-bottom: 76px;
-
       position: relative;
 
       &::after {
-  content: "";
-  position: absolute;
-  bottom: -90px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 35%;
-  height: 150px;
-  background-image: url(/h2Underline.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-}
+        content: "";
+        position: absolute;
+        bottom: -90px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 35%;
+        height: 150px;
+        background-image: url(/h2Underline.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+      }
     }
+
     .sub-heading {
       text-align: center;
       width: 60%;
@@ -40,17 +39,47 @@
     }
 
     .content {
-  overflow: hidden;
-  position: relative;
+      overflow: hidden;
+      position: relative;
+    }
+
+    // ── Video section ──────────────────────────────
+    // FIX: video-section replaces the inline style div.
+    // Uses width:100% + max-width so it never overflows on mobile.
+  }
 }
 
-/* ===== SLIDER WRAPPER ===== */
+// ── Video player (used in VideoPlayer.tsx) ─────────
+.video-section {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto 60px;
+  padding: 0 16px; // FIX: side padding so video doesn't touch screen edges on mobile
+
+  // box to keep video from overflowing on tiny screens
+  box-sizing: border-box;
+}
+
+.video {
+  width: 100%;
+  height: auto;           // FIX: was fixed height — causes letterbox gaps on mobile
+  display: block;
+  border-radius: 12px;
+  max-height: 520px;
+  object-fit: contain;
+
+  @media (max-width: 768px) {
+    border-radius: 8px;
+    max-height: 260px;
+  }
+}
+
+// ── Slider / cards ─────────────────────────────────
 .slider {
-  overflow: hidden;
+  overflow: hidden;       // FIX: overflow:hidden must live on .slider, NOT on inner-wrapper
   width: 100%;
 }
 
-/* ===== TRACK (MOVING PART) ===== */
 .track {
   display: flex;
   gap: 24px;
@@ -58,12 +87,10 @@
   animation: infiniteScroll 30s linear infinite;
 }
 
-/* Pause on hover (professional feel) */
 .slider:hover .track {
   animation-play-state: paused;
 }
 
-/* ===== CARD ===== */
 .card-inner {
   width: 380px;
   padding: 30px;
@@ -71,6 +98,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
 }
 
 .review {
@@ -95,44 +125,74 @@
   }
 }
 
-/* ===== INFINITE ANIMATION ===== */
 @keyframes infiniteScroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
+
+// ── Tablet ─────────────────────────────────────────
+@media (max-width: 1024px) {
+  .outer-wrapper .inner-wrapper {
+    padding: 60px 24px;
+
+    h2 {
+      font-size: 38px;
+      line-height: 44px;
+    }
+
+    .sub-heading {
+      width: 80%;
+    }
+  }
+
+  .card-inner {
+    width: 320px;
+    padding: 24px;
   }
 }
 
-/* ===== MOBILE ===== */
-
+// ── Mobile ──────────────────────────────────────────
 @media (max-width: 768px) {
-  .outer-wrapper {
-    .inner-wrapper {
-      padding: 50px 20px;
+  .outer-wrapper .inner-wrapper {
+    padding: 40px 16px; // FIX: consistent side padding on mobile
 
-      h2 {
-        font-size: 32px;
-      }
+    h2 {
+      font-size: 28px;
+      line-height: 34px;
+      margin-bottom: 50px;
 
-      .sub-heading {
-        width: 100%;
-      }
-
-      .content {
-        .card-inner {
-          width: 280px;
-          padding: 20px;
-        }
-
-        .left-arrow,
-        .right-arrow {
-          display: none;
-        }
+      &::after {
+        width: 60%;   // FIX: 35% was too narrow on mobile, underline didn't show
+        bottom: -60px;
+        height: 100px;
       }
     }
+
+    .sub-heading {
+      width: 100%;
+      font-size: 15px;
+    }
+  }
+
+  .card-inner {
+    width: 260px;   // FIX: was 280px — tight on 320px-wide phones, leaving no room for gap
+    padding: 18px;
+  }
+
+  .track {
+    gap: 14px;       // FIX: tighter gap on mobile to fit more card edge into view
+    animation-duration: 20s; // slightly faster on small screens
+  }
+}
+
+@media (max-width: 400px) {
+  .card-inner {
+    width: 220px;
+    padding: 14px;
+  }
+
+  .review {
+    font-size: 14px;
+    line-height: 22px;
   }
 }

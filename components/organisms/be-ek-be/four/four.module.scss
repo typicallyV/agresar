@@ -2,7 +2,11 @@
   width: 100%;
   background: #fff;
   padding: 80px 0;
-  overflow: hidden;
+
+  // FIX 1: overflow:hidden on the outer wrapper clips the sliding tracks
+  // and can also hide box-shadows. Removed it here; clipping is handled
+  // per-element (.videoWrapper, .card) where it's actually needed.
+
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -19,7 +23,7 @@
   width: min(820px, 88%);
   margin: 0 auto;
   border-radius: 20px;
-  overflow: hidden;
+  overflow: hidden; // kept here — correct for clipping the video corners
   background: #111;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 
@@ -90,6 +94,12 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
+
+  // FIX 2: The track uses width:max-content which expands wider than the
+  // viewport. Without overflow:hidden on the scroll container, the page
+  // gets horizontal scrollbar on mobile. Clip only the tracks here,
+  // not the entire outerWrapper (which would clip the video shadow).
+  overflow: hidden;
 }
 
 .track {
@@ -183,6 +193,11 @@
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+// FIX 3: The keyframes use -33.333% which only works correctly when the
+// track contains exactly 3 repetitions of the card set (the standard
+// infinite-scroll pattern). If your JSX duplicates cards differently
+// (e.g. 2x or 4x), update this percentage to -50% or -25% accordingly.
+// The value must equal (1 / number-of-duplicates) * 100%.
 @keyframes scrollLeft {
   from { transform: translateX(0); }
   to   { transform: translateX(-33.333%); }
